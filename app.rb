@@ -24,12 +24,12 @@ class SmartibuyApp < Sinatra::Base
     'Github repo</a>'
   end
 
-  get '/api/v1/all_data/:id' do
+  get '/api/v1/all_data/:id.json' do
     content_type :json
     get_all_information(params[:id]).to_jsonlist
   end
 
-  post '/api/v1/data/search' do
+  get '/api/v1/data/search' do
     content_type :json
     begin
       req = JSON.parse(request.body.read)
