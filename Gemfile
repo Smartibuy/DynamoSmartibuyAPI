@@ -9,4 +9,5 @@ group :test do
   gem 'minitest'
   gem 'rack-test'
   gem 'rake'
+  gem 'secondHandler'
 end
