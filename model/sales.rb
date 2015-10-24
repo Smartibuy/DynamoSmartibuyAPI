@@ -25,4 +25,17 @@ class Goods
     end
     result.to_json
   end
+
+  def get_good_by_id(good_id)
+    element = {}
+    message.each do |good|
+      id = good['id']
+      if id == good_id
+        element['ID'] = good['id']
+        element['刊登時間'] = good['updated_time']
+        element['商品資訊'] = good['message']
+      end
+    end
+    element
+  end
 end
