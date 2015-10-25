@@ -1,5 +1,5 @@
 #SmartibuyAPI
-==
+
 Web service of Smartibuy based on sinatra.
 
 # For development
@@ -10,7 +10,7 @@ After clone this repository, use `bundle` to install all dependences
 $ bundle install
 ```
 Use `rackup` to run the web app  (default port is 9292)
-visit the website http://localhost:port (http://localhost:9292)
+and visit the website http://localhost:port (http://localhost:9292)
 
 ```sh
 $ rackup config.ru -p [port]
