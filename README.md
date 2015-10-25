@@ -1,7 +1,7 @@
 #SmartibuyAPI
 
 Web service of Smartibuy based on sinatra.  
-[![Build Status](https://travis-ci.org/Smartibuy/SmartibuyAPI.svg?branch=lockys_CI)](https://travis-ci.org/Smartibuy/SmartibuyAPI)
+[![Build Status](https://travis-ci.org/Smartibuy/SmartibuyAPI.svg?branch=master)](https://travis-ci.org/Smartibuy/SmartibuyAPI)
 
 # For development
 
