@@ -2,7 +2,10 @@ require 'sinatra/base'
 require_relative './model/sales'
 
 class SmartibuyApp < Sinatra::Base
-
+  configure :production, :development do
+   enable :logging  
+  end
+  
   helpers do
     def get_all_information(id)
       Goods.new(id)
@@ -24,7 +27,7 @@ class SmartibuyApp < Sinatra::Base
     'Github repo</a>'
   end
 
-  show_good_info = lambda do
+  show_group_goods = lambda do
     content_type :json
     get_all_information(params[:id]).to_jsonlist
   end
@@ -40,6 +43,6 @@ class SmartibuyApp < Sinatra::Base
   end
   
   get '/', &show_service_state
-  get '/api/v1/all_data/:id.json', &show_good_info
-  get '/api/v1/data/search', &search_good
+  get '/api/v1/fb_data/:id.json', &show_group_goods
+  post '/api/v1/fb_data/search', &search_good
 end
