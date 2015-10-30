@@ -8,9 +8,7 @@ describe 'Getting the root of the service' do
   end
 end
 
-SECOND_HAND_GID = "817620721658179"
-EMPTY_SECOND_HAND_GID = "0000000"
-VAILD_GOOD_ID = "817620721658179_846628928757358"
+
 
 describe 'Getting group ID goods' do
   it 'Should return ok' do
