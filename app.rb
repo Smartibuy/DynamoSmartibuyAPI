@@ -16,7 +16,7 @@ class SmartibuyApp < Sinatra::Base
     end
   end
 
-  get '/' do
+  show_service_state = lambda do
     'Hello, This is Smartibuy service. <br>' \
     'Hope you will enjoy your shooping!<br>'\
     'Current API version is v1.<br>'\
@@ -24,12 +24,12 @@ class SmartibuyApp < Sinatra::Base
     'Github repo</a>'
   end
 
-  get '/api/v1/all_data/:id.json' do
+  show_good_info = lambda do
     content_type :json
     get_all_information(params[:id]).to_jsonlist
   end
 
-  get '/api/v1/data/search' do
+  search_good = lambda do
     content_type :json
     begin
       req = JSON.parse(request.body.read)
@@ -37,6 +37,9 @@ class SmartibuyApp < Sinatra::Base
       halt 400
     end
     get_good(req['group_id'], req['good_id']).to_json
-
   end
+  
+  get '/', &show_service_state
+  get '/api/v1/all_data/:id.json', &show_good_info
+  get '/api/v1/data/search', &search_good
 end
