@@ -3,8 +3,6 @@
 [ ![Codeship Status for Smartibuy/SmartibuyAPI](https://codeship.com/projects/4df54750-62b8-0133-c7a9-32b67f1e3a7d/status?branch=master)](https://codeship.com/projects/112664)
 
 
-https://codeship.com/projects/YOUR_PROJECT_UUID/status?branch=master
-
 Web service of Smartibuy based on sinatra. （Deployed on Codeship）
 [![Build Status](https://travis-ci.org/Smartibuy/SmartibuyAPI.svg?branch=master)](https://travis-ci.org/Smartibuy/SmartibuyAPI)
 
@@ -34,18 +32,18 @@ $ rake spec
 
 # API usage
 **GET /api/v1/**
-- functionality: 
+- functionality:
   - show our service status such as vesrion and alive
-- response : 
+- response :
   - 200, show version
 - example:
 ```bash
  curl -GET http://127.0.0.1:3000/api/v1/
 ```
 **GET /api/v1/fb_data/[facebook group id].json**
-- functionality: 
+- functionality:
   - Show all good infomation in the certian FB group
-- response : 
+- response :
   - 200, return in **application/json** format
   - 404, the facebook group is not existed.
 - example:
@@ -54,9 +52,9 @@ $ rake spec
 ```
 
 **POST /api/v1/fb_data/search**
-- functionality: 
+- functionality:
   - Search the certain good info. by good ID
-- request : 
+- request :
   - Content-type: application/json
 ```
   {
@@ -64,7 +62,7 @@ $ rake spec
     "good_id":"[Good_id]" # (string) good id
   }
 ```
-- response : 
+- response :
   - 200, return in **application/json** format
   - 400, request not in json format
 - example:
