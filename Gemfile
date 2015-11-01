@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
-gem 'thin'
 gem 'json'
 gem 'secondHandler'
 
 group :test do
+  gem 'rack'
   gem 'rake'
   gem 'minitest'
   gem 'rack-test'
+  gem 'vcr'
+  gem 'webmock'
 end
