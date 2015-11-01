@@ -1,6 +1,6 @@
 #SmartibuyAPI
 
-Web service of Smartibuy based on sinatra.  
+Web service of Smartibuy based on sinatra. （Deployed on Codeship）
 [![Build Status](https://travis-ci.org/Smartibuy/SmartibuyAPI.svg?branch=master)](https://travis-ci.org/Smartibuy/SmartibuyAPI)
 
 # For development
