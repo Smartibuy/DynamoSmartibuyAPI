@@ -25,24 +25,55 @@ Thin web server (v1.6.4 codename Gob Bluth)
 Maximum connections set to 1024
 Listening on localhost:[port], CTRL+C to stop
 ```
-Your web service offers the following routes
-
-```sh
-# Show all good infomation in the certian FB group
-$ curl -GET http://127.0.0.1:3000/api/v1/all_data/[facebook group id].json
-  # $ curl -GET http://127.0.0.1:3000/api/v1/all_data/817620721658179.json
-
-# Search the certain good info. by good ID
-$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d "{\"group_id\":\"[group id]\", \"good_id\":\"[good id]\"}" http://localhost:3000/api/v1/data/search
-  # $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d "{\"group_id\":\"817620721658179\", \"good_id\":\"817620721658179_909156159171301\"}" http://localhost:3000/api/v1/data/search
-
-```
-
 Run testing
 
 ```sh
 $ rake spec
 ```
+
+
+# API usage
+**GET /api/v1/**
+- functionality: 
+  - show our service status such as vesrion and alive
+- response : 
+  - 200, show version
+- example:
+```bash
+ curl -GET http://127.0.0.1:3000/api/v1/
+```
+**GET /api/v1/fb_data/[facebook group id].json**
+- functionality: 
+  - Show all good infomation in the certian FB group
+- response : 
+  - 200, return in **application/json** format
+  - 404, the facebook group is not existed.
+- example:
+```bash
+ curl -GET http://127.0.0.1:3000/api/v1/fb_data/817620721658179.json
+```
+
+**POST /api/v1/fb_data/search**
+- functionality: 
+  - Search the certain good info. by good ID
+- request : 
+  - Content-type: application/json
+```
+  {
+    "group_id":"[Group_id]", # (string) facebook id
+    "good_id":"[Good_id]" # (string) good id
+  }
+```
+- response : 
+  - 200, return in **application/json** format
+  - 400, request not in json format
+- example:
+
+```bash
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d "{\"group_id\":\"817620721658179\", \"good_id\":\"817620721658179_909156159171301\"}" http://localhost:3000/api/v1/fb_data/search
+```
+
+
 
 LICENSE
 ==
