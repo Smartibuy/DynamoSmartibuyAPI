@@ -31,7 +31,7 @@ $ rake spec
 
 
 # API usage
-**GET /api/v1/**
+**GET /**
 - functionality:
   - show our service status such as vesrion and alive
 - response :
@@ -68,7 +68,7 @@ $ rake spec
 - example:
 
 ```bash
-$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET -d "{\"group_id\":\"817620721658179\", \"good_id\":\"817620721658179_909156159171301\"}" http://localhost:3000/api/v1/fb_data/search
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"group_id\":\"817620721658179\", \"good_id\":\"817620721658179_909156159171301\"}" http://localhost:3000/api/v1/fb_data/search
 ```
 
 
