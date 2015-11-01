@@ -1,5 +1,10 @@
 #SmartibuyAPI
 
+[ ![Codeship Status for Smartibuy/SmartibuyAPI](https://codeship.com/projects/4df54750-62b8-0133-c7a9-32b67f1e3a7d/status?branch=master)](https://codeship.com/projects/112664)
+
+
+https://codeship.com/projects/YOUR_PROJECT_UUID/status?branch=master
+
 Web service of Smartibuy based on sinatra. （Deployed on Codeship）
 [![Build Status](https://travis-ci.org/Smartibuy/SmartibuyAPI.svg?branch=master)](https://travis-ci.org/Smartibuy/SmartibuyAPI)
 
