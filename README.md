@@ -37,7 +37,7 @@ $ rake spec
   - 200, show version
 - example:
 ```bash
- curl -GET http://127.0.0.1:3000/api/v1/
+ curl -GET http://127.0.0.1:3000/
 ```
 **GET /api/v1/fb_data/[facebook group id].json**
 - functionality:
