@@ -1,2 +1,2 @@
-require './app.rb'
-run SmartibuyApp
+require './application_controller.rb'
+run ApplicationController

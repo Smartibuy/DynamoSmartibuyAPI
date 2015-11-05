@@ -1,11 +1,11 @@
 require 'sinatra/base'
 require_relative './model/sales'
 
-class SmartibuyApp < Sinatra::Base
+class ApplicationController < Sinatra::Base
   configure :production, :development do
-   enable :logging  
+   enable :logging
   end
-  
+
   helpers do
     def get_all_information(id)
       Goods.new(id)
@@ -41,7 +41,7 @@ class SmartibuyApp < Sinatra::Base
     end
     get_good(req['group_id'], req['good_id']).to_json
   end
-  
+
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
