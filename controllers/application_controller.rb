@@ -42,13 +42,13 @@ class ApplicationController < Sinatra::Base
     get_good(req['group_id'], req['good_id']).to_json
   end
 
-  get_product = lambda do
-
-  end
-
-  create_product = lambda do
-
-  end
+  # get_product = lambda do
+  #
+  # end
+  #
+  # create_product = lambda do
+  #
+  # end
 
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
@@ -57,7 +57,7 @@ class ApplicationController < Sinatra::Base
   # ==========
   # DB Related
   # ==========
-  get 'api/v1/product/:id', &get_product
-  post '/api/v1/create_product', &create_product
+  # get 'api/v1/product/:id', &get_product
+  # post '/api/v1/create_product', &create_product
 
 end
