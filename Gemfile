@@ -1,13 +1,16 @@
 source 'https://rubygems.org'
+ruby '2.2.3'
 
 gem 'sinatra'
 gem 'json'
 gem 'secondHandler'
+gem 'thin'
 
 gem 'activerecord'
 gem 'sinatra-activerecord'
+gem 'tux'
 
-group :development do
+group :test, :development do
   gem 'sqlite3'
 end
 
@@ -16,11 +19,10 @@ group :production do
 end
 
 group :test do
-  gem 'sqlite3'
   gem 'rack'
   gem 'rake'
-  gem 'minitest'
   gem 'rack-test'
+  gem 'minitest'
   gem 'vcr'
   gem 'webmock'
 end
