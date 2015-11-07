@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require_relative '../models/sales'
+require_relative '../models/sale'
 
 class ApplicationController < Sinatra::Base
   configure :production, :development do
