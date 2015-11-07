@@ -4,7 +4,6 @@ ruby '2.2.3'
 gem 'sinatra'
 gem 'json'
 gem 'secondHandler'
-gem 'thin'
 
 gem 'activerecord'
 gem 'sinatra-activerecord'
