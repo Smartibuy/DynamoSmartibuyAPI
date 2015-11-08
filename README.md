@@ -96,6 +96,37 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 ```
 
 
+**POST /api/v1/create_product**
+- functionality:
+  - Create a product with its informations.
+- request :
+  - Content-type: application/json
+```
+  {
+    "product_id":"[Product ID]", # (string) Product ID
+    "fb_user_id": "[FB User ID]", # (string) FB User ID
+    "product_title": "[Product Title]", # (string) Product Title
+    "product_information": "[Product INFO]", # (string) Product INFO
+    "price": "[Product Price]", # (string) Product Pric
+    "group_id": "[FB Group ID]", # (string) FB Group ID
+    "pic_url": "[Picture URL]", # (string) Picture URL
+    "update_time": "[Update Time]", # (string) Update Time
+    "create_time": "[Create Time]", # (string) Create Time
+    "created_at": "[Create at]", # (string) Create at
+    "updated_at": "[Update at]" # (string) Update at
+  }
+```
+- response :
+  - 303, redirect to http://localhost:3000/api/v1/product/:id
+  - 400, request not in json format
+- example:
+
+```bash
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"product_id\":\"817620721658179_914934681926782\", \"fb_user_id\":\"rubyuser\", \"product_title\":\"PONY拖鞋\", \"product_information\":\"7-8成新\", \"price\":\"議價\", \"group_id\":\"817620721658179\", \"pic_url\":\"None\", \"update_time\":\"2015-11-08T05:41:08+0000\", \"create_time\":\"2015-11-08T05:41:08+0000\", \"create_at\":\"2015-11-08T05:41:08+0000\", \"update_at\":\"2015-11-08T05:41:08+0000\"}" http://localhost:3000/api/v1/create_product
+```
+
+
+
 
 
 LICENSE
