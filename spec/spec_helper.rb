@@ -1,4 +1,5 @@
 ENV['RACK_ENV'] = 'test'
+Dir.glob('./{models,helpers,controllers}/*.rb').each { |file| require file }
 
 require 'minitest/autorun'
 require 'rack/test'
