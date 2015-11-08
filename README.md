@@ -75,7 +75,7 @@ $ rake spec
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"group_id\":\"817620721658179\", \"good_id\":\"817620721658179_909156159171301\"}" http://localhost:3000/api/v1/fb_data/search
 ```
 
-**POST /api/v1/fb_data/create_product**
+**POST /api/v1/create_group**
 - functionality:
   - Create a group with id and name.
 - request :
