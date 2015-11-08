@@ -87,12 +87,12 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
   }
 ```
 - response :
-  - 303, redirect to http://localhost:3000/api/v1/product/:id
+  - 303, redirect to http://localhost:3000/api/v1/group/:id
   - 400, request not in json format
 - example:
 
 ```bash
-$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"group_id\":\"817620721658179\", \"group_name\":\"清交二手大拍賣XD\"}" http://localhost:3000/api/v1/create_product
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"group_id\":\"817620721658179\", \"group_name\":\"清交二手大拍賣XD\"}" http://localhost:3000/api/v1/create_group
 ```
 
 
