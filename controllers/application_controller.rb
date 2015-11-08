@@ -67,7 +67,7 @@ class ApplicationController < Sinatra::Base
 
     if group.save
       status 201
-      redirect "/api/v1/product/#{group.id}", 303
+      redirect "/api/v1/group/#{group.id}", 303
     else
       halt 500, 'Failed to save group.'
     end
@@ -76,6 +76,6 @@ class ApplicationController < Sinatra::Base
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
 
-  get '/api/v1/product/:id', &get_group
-  post '/api/v1/create_product', &create_group
+  get '/api/v1/group/:id', &get_group
+  post '/api/v1/create_group', &create_group
 end
