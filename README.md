@@ -21,6 +21,12 @@ Thin web server (v1.6.4 codename Gob Bluth)
 Maximum connections set to 1024
 Listening on localhost:[port], CTRL+C to stop
 ```
+
+If you want to run in test environment.
+```sh
+$ rackup config.ru -p 3000 -E test
+```
+
 Run testing
 
 ```sh
@@ -68,6 +74,27 @@ $ rake spec
 ```bash
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"group_id\":\"817620721658179\", \"good_id\":\"817620721658179_909156159171301\"}" http://localhost:3000/api/v1/fb_data/search
 ```
+
+**POST /api/v1/fb_data/create_product**
+- functionality:
+  - Create a group with id and name.
+- request :
+  - Content-type: application/json
+```
+  {
+    "group_id":"[Group_id]", # (string) facebook group id
+    "group_name":"[Group_name]" # (string) group name
+  }
+```
+- response :
+  - 303, redirect to http://localhost:3000/api/v1/product/:id
+  - 400, request not in json format
+- example:
+
+```bash
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"group_id\":\"817620721658179\", \"group_name\":\"清交二手大拍賣XD\"}" http://localhost:3000/api/v1/create_product
+```
+
 
 
 

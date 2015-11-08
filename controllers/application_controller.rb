@@ -3,7 +3,7 @@ require_relative '../models/sale'
 
 class ApplicationController < Sinatra::Base
   configure :production, :development do
-   enable :logging
+    enable :logging
   end
 
   helpers do
@@ -42,22 +42,40 @@ class ApplicationController < Sinatra::Base
     get_good(req['group_id'], req['good_id']).to_json
   end
 
-  # get_product = lambda do
-  #
-  # end
-  #
-  # create_product = lambda do
-  #
-  # end
+  get_group = lambda do
+    content_type :json
+    begin
+      group = Group.find(params[:id])
+      group_name = group.group_name
+      group_id = group.group_id
+      logger.info({ id: group.id, group_name: group_name, group_id: group_id }.to_json)
+    rescue
+      halt 400
+    end
+    { id: group.id, group_name: group_name, group_id: group_id }.to_json
+  end
 
+  create_group = lambda do
+    content_type :json
+    begin
+      req = JSON.parse(request.body.read)
+      logger.info req
+    rescue
+      halt 400
+    end
+    group = Group.new(group_id: req['group_id'], group_name: req['group_name'])
+
+    if group.save
+      status 201
+      redirect "/api/v1/product/#{group.id}", 303
+    else
+      halt 500, 'Failed to save group.'
+    end
+  end
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
 
-  # ==========
-  # DB Related
-  # ==========
-  # get 'api/v1/product/:id', &get_product
-  # post '/api/v1/create_product', &create_product
-
+  get '/api/v1/product/:id', &get_group
+  post '/api/v1/create_product', &create_group
 end
