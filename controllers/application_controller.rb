@@ -75,16 +75,31 @@ class ApplicationController < Sinatra::Base
 
 
   get_product = lambda do
-  #   content_type :json
-  #   begin
-  #     group = Group.find(params[:id])
-  #     group_name = group.group_name
-  #     group_id = group.group_id
-  #     logger.info({ id: group.id, group_name: group_name, group_id: group_id }.to_json)
-  #   rescue
-  #     halt 400
-  #   end
-  #   { id: group.id, group_name: group_name, group_id: group_id }.to_json
+    content_type :json
+    begin
+      product = Product.find(params[:id])
+      product_title = product.product_title
+      product_id = product.product_id
+      fb_user_id = product.fb_user_id
+      product_information = product.product_information
+      price = product.price
+      group_id = product.group_id
+
+      logger.info({ product_title: product.product_title,
+                    product_id: product.product_id,
+                    fb_user_id: product.fb_user_id,
+                    product_information: product.product_information,
+                    price: product.price,
+                    group_id: product.group_id}.to_json)
+    rescue
+      halt 400
+    end
+    { product_title: product.product_title,
+                  product_id: product.product_id,
+                  fb_user_id: product.fb_user_id,
+                  product_information: product.product_information,
+                  price: product.price,
+                  group_id: product.group_id }.to_json
   end
 
   create_product = lambda do
