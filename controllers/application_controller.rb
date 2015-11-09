@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
     'Hope you will enjoy your shooping!<br>'\
     'Current API version is v1.<br>'\
     'See Homepage at <a href="https://github.com/Smartibuy/SecondHand-ler">' \
-    'Github repo</a>'
+    'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.'
   end
 
   show_group_goods = lambda do
