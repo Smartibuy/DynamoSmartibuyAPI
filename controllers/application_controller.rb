@@ -1,23 +1,31 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require_relative '../models/sale'
+require 'httparty'
+require 'hirb'
+require 'slim'
+
 
 class ApplicationController < Sinatra::Base
+  
+  helpers GoodsHelpers
+  enable :sessions
+  register Sinatra::Flash
+  use Rack::MethodOverride
+  set :views, File.expand_path('../../views', __FILE__)
+  set :public_folder, File.expand_path('../../public', __FILE__)
+  
+  configure do
+    Hirb.enable
+    set :session_secret, 'something'
+    set :api_ver, 'api/v1'
+  end
+  
   configure :production, :development do
     enable :logging
   end
 
-  helpers do
-    def get_all_information(id)
-      Goods.new(id)
-    rescue
-      halt 404
-    end
-    def get_good(group_id, good_id)
-      Goods.new(group_id).get_good_by_id(good_id)
-    rescue
-      halt 404
-    end
-  end
+  
 
   show_service_state = lambda do
     'Hello, This is Smartibuy service. <br>' \
