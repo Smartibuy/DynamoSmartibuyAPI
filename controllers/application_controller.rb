@@ -17,7 +17,7 @@ class ApplicationController < Sinatra::Base
   
   configure do
     Hirb.enable
-    set :session_secret, 'something'
+    set :session_secret, 'smartibuyisgood'
     set :api_ver, 'api/v1'
   end
   
