@@ -33,6 +33,15 @@ class ApplicationController < Sinatra::Base
   configure :production, :development do
     enable :logging
   end
+  
+  helpers do
+    def current_page?(path = ' ')
+      path_info = request.path_info
+      path_info += ' ' if path_info == '/'
+      request_path = path_info.split '/'
+      request_path[1] == path
+    end
+  end
 
   show_service_state = lambda do
     'Hello, This is Smartibuy service. <br>' \
