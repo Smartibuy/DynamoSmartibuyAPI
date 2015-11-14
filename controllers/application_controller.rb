@@ -21,11 +21,17 @@ class ApplicationController < Sinatra::Base
     set :api_ver, 'api/v1'
   end
   
+  configure :development, :test do
+    set :api_server, 'http://localhost:9292'
+  end
+
+  configure :production do
+    set :api_server, 'http://smartibuyweb.herokuapp.com/'
+  end
+  
   configure :production, :development do
     enable :logging
   end
-
-  
 
   show_service_state = lambda do
     'Hello, This is Smartibuy service. <br>' \
@@ -138,7 +144,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-
+  # Web API Routes
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
@@ -148,5 +154,12 @@ class ApplicationController < Sinatra::Base
 
   get '/api/v1/product/:id', &get_product
   post '/api/v1/create_product', &create_product
+  
+  app_get_root = lambda do
+    slim :home
+  end
+  
+  # Web App Views Routes
+  get '/', &app_get_root
 
 end
