@@ -12,6 +12,7 @@ class ApplicationController < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
   use Rack::MethodOverride
+  
   set :views, File.expand_path('../../views', __FILE__)
   set :public_folder, File.expand_path('../../public', __FILE__)
   
@@ -145,7 +146,7 @@ class ApplicationController < Sinatra::Base
   end
 
   # Web API Routes
-  get '/', &show_service_state
+  get '/api/v1/?', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
 

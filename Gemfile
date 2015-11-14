@@ -9,9 +9,13 @@ gem 'secondHandler'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'tux'
-gem 'httparty'
 gem 'hirb'
+
+gem 'httparty'
+
+gem 'sinatra-flash'
 gem 'slim'
+gem 'tilt'
 
 
 group :test, :development do
