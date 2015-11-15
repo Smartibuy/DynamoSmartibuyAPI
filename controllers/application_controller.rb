@@ -7,21 +7,21 @@ require 'slim'
 
 
 class ApplicationController < Sinatra::Base
-  
+
   helpers GoodsHelpers
   enable :sessions
   register Sinatra::Flash
   use Rack::MethodOverride
-  
+
   set :views, File.expand_path('../../views', __FILE__)
   set :public_folder, File.expand_path('../../public', __FILE__)
-  
+
   configure do
     Hirb.enable
     set :session_secret, 'smartibuyisgood'
     set :api_ver, 'api/v1'
   end
-  
+
   configure :development, :test do
     set :api_server, 'http://localhost:9292'
   end
@@ -29,11 +29,11 @@ class ApplicationController < Sinatra::Base
   configure :production do
     set :api_server, 'http://smartibuyweb.herokuapp.com/'
   end
-  
+
   configure :production, :development do
     enable :logging
   end
-  
+
   helpers do
     def current_page?(path = ' ')
       path_info = request.path_info
@@ -164,12 +164,54 @@ class ApplicationController < Sinatra::Base
 
   get '/api/v1/product/:id', &get_product
   post '/api/v1/create_product', &create_product
-  
+
+
+
+
   app_get_root = lambda do
     slim :home
   end
-  
+
+
+  app_get_group = lambda do
+    @goodlist = JSON.parse(get_all_information(params[:id]).to_jsonlist)
+    slim :goods_info
+  end
+
+  app_post_group =lambda do
+    request_url = "#{settings.api_server}/#{settings.api_ver}/create_group"
+    group_id = params[:group_id]
+    group_name = params[:group_name]
+    params_h = {
+      group_id: group_id,
+      group_name: group_name
+    }
+
+    options =  {
+      body: params_h.to_json,
+      headers: { 'Content-Type' => 'application/json' }
+    }
+
+    result = HTTParty.post(request_url, options)
+    if (result.code != 200)
+      flash[:notice] = 'Could not found service'
+      redirect '/group'
+      return nil
+    end
+
+    redirect "/group/#{group_id}"
+  end
+
+  create_group = lambda do
+    slim :creategroup
+  end
+
   # Web App Views Routes
   get '/', &app_get_root
+  get '/group/:id' , &app_get_group
+  post '/group' ,&app_post_group
+  get '/group', &create_group
+
+
 
 end
