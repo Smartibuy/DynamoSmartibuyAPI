@@ -13,7 +13,6 @@ gem 'hirb'
 
 gem 'httparty'
 
-gem 'sinatra-flash'
 gem 'slim'
 gem 'tilt'
 
