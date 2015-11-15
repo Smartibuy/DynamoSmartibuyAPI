@@ -107,6 +107,7 @@ DEPENDENCIES
   sinatra-flash
   slim
   sqlite3
+  tilt
   tux
   vcr
   webmock
