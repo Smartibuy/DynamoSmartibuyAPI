@@ -206,11 +206,25 @@ class ApplicationController < Sinatra::Base
     slim :creategroup
   end
 
+  search = lambda do
+    slim :search
+  end
+
+  search_good_by_group = lambda do
+    group_id = params[:group_id]
+    puts '@'
+    puts group_id
+    redirect "/group/#{group_id}"
+  end
+
   # Web App Views Routes
   get '/', &app_get_root
   get '/group/:id' , &app_get_group
   post '/group' ,&app_post_group
   get '/group', &create_group
+  get '/search', &search
+  post '/search', &search_good_by_group
+
 
 
 
