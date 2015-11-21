@@ -23,7 +23,7 @@ class ApplicationController < Sinatra::Base
   end
 
   configure :development, :test do
-    set :api_server, 'https://test-qoo392.c9.io'
+    set :api_server, 'http://localhost:9292'
   end
 
   configure :production do
@@ -181,7 +181,7 @@ class ApplicationController < Sinatra::Base
   app_post_group =lambda do
     request_url = "#{settings.api_server}/#{settings.api_ver}/create_group"
     
-    form = CreateGroupForm.new(params) 
+    form = CreateGroupForm.new(params)
     result = CreateGroupFromAPI.new(request_url, form).call
     if (result.code != 200)
       flash[:notice] = 'Could not found service'
