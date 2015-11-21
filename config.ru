@@ -1,3 +1,3 @@
-Dir.glob('./{models,helpers,controllers}/*.rb').each { |file| require file }
+Dir.glob('./{models,helpers,controllers,services,forms}/*.rb').each { |file| require file }
 
 run ApplicationController

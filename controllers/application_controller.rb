@@ -23,11 +23,11 @@ class ApplicationController < Sinatra::Base
   end
 
   configure :development, :test do
-    set :api_server, 'http://localhost:9292'
+    set :api_server, 'https://test-qoo392.c9.io'
   end
 
   configure :production do
-    set :api_server, 'http://smartibuyweb.herokuapp.com/'
+    set :api_server, 'http://smartibuyweb.herokuapp.com'
   end
 
   configure :production, :development do
@@ -180,26 +180,16 @@ class ApplicationController < Sinatra::Base
 
   app_post_group =lambda do
     request_url = "#{settings.api_server}/#{settings.api_ver}/create_group"
-    group_id = params[:group_id]
-    group_name = params[:group_name]
-    params_h = {
-      group_id: group_id,
-      group_name: group_name
-    }
-
-    options =  {
-      body: params_h.to_json,
-      headers: { 'Content-Type' => 'application/json' }
-    }
-
-    result = HTTParty.post(request_url, options)
+    
+    form = CreateGroupForm.new(params) 
+    result = CreateGroupFromAPI.new(request_url, form).call
     if (result.code != 200)
       flash[:notice] = 'Could not found service'
       redirect '/group'
       return nil
     end
 
-    redirect "/group/#{group_id}"
+    redirect "/group/#{result.group_id}"
   end
 
   create_group = lambda do
