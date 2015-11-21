@@ -9,6 +9,7 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'tux'
 gem 'hirb'
+gem 'virtus'
 
 gem 'httparty'
 
