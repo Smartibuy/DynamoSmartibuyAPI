@@ -43,11 +43,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  # ==========
+  # API Routes
+  # ==========
+
   show_service_state = lambda do
-    'Hello, This is Smartibuy service. <br>' \
-    'Hope you will enjoy your shooping!<br>'\
-    'Current API version is v1.<br>'\
-    'See Homepage at <a href="https://github.com/Smartibuy/SecondHand-ler">' \
+    'Hello, This is Smartibuy web service. <br>' \
+    'Hope you will enjoy your shoping!<br>'\
+    "Current API version is #{settings.api_ver}<br>"\
+    'See Homepage at <a href="https://github.com/Smartibuy">' \
     'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.'
   end
 
@@ -154,8 +158,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  # Web API Routes
-  get '/api/v1/?', &show_service_state
+  get '/api/state', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
 
@@ -166,21 +169,23 @@ class ApplicationController < Sinatra::Base
   post '/api/v1/create_product', &create_product
 
 
-
+  # =============
+  # Web UI Routes
+  # =============
 
   app_get_root = lambda do
     slim :home
   end
 
-
   app_get_group = lambda do
+    # for 清交二手貨倉, id is 817620721658179.
     @goodlist = JSON.parse(get_all_information(params[:id]).to_jsonlist)
     slim :goods_info
   end
 
   app_post_group =lambda do
     request_url = "#{settings.api_server}/#{settings.api_ver}/create_group"
-    
+
     form = CreateGroupForm.new(params)
     result = CreateGroupFromAPI.new(request_url, form).call
     if (result.code != 200)
@@ -202,8 +207,7 @@ class ApplicationController < Sinatra::Base
 
   search_good_by_group = lambda do
     group_id = params[:group_id]
-    puts '@'
-    puts group_id
+    puts 'Group id: ' << group_id
     redirect "/group/#{group_id}"
   end
 
