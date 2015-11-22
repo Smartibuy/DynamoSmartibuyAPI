@@ -219,7 +219,4 @@ class ApplicationController < Sinatra::Base
   get '/search', &search
   post '/search', &search_good_by_group
 
-
-
-
 end
