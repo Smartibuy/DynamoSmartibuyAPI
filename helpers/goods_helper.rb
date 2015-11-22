@@ -6,6 +6,7 @@ module GoodsHelpers
     rescue
       halt 404
   end
+  
   def get_good(group_id, good_id)
       Goods.new(group_id).get_good_by_id(good_id)
     rescue

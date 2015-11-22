@@ -168,7 +168,6 @@ class ApplicationController < Sinatra::Base
   get '/api/v1/product/:id', &get_product
   post '/api/v1/create_product', &create_product
 
-
   # =============
   # Web UI Routes
   # =============
@@ -179,7 +178,9 @@ class ApplicationController < Sinatra::Base
 
   app_get_group = lambda do
     # for 清交二手貨倉, id is 817620721658179.
-    @goodlist = JSON.parse(get_all_information(params[:id]).to_jsonlist)
+    request_url = "#{settings.api_server}/#{settings.api_ver}/fb_data/" << params[:id] << ".json"
+    results = HTTParty.get(request_url)
+    @goodlist = results
     slim :goods_info
   end
 
@@ -207,7 +208,7 @@ class ApplicationController < Sinatra::Base
 
   search_good_by_group = lambda do
     group_id = params[:group_id]
-    puts 'Group id: ' << group_id
+    puts 'group id: ' << group_id
     redirect "/group/#{group_id}"
   end
 
