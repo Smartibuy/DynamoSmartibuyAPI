@@ -158,6 +158,16 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get_product_list = lambda do
+    content_type :json
+    begin
+      group_list = Goods.new(params[:id])
+    rescue
+      halt 404
+    end
+    group_list.to_jsonlist
+  end
+
   get '/api/state', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
@@ -167,7 +177,7 @@ class ApplicationController < Sinatra::Base
 
   get '/api/v1/product/:id', &get_product
   post '/api/v1/create_product', &create_product
-
+  get '/api/v1/product_list/:id', &get_product_list
 
   # =============
   # Web UI Routes
@@ -179,7 +189,9 @@ class ApplicationController < Sinatra::Base
 
   app_get_group = lambda do
     # for 清交二手貨倉, id is 817620721658179.
-    @goodlist = JSON.parse(get_all_information(params[:id]).to_jsonlist)
+    request_url = "#{settings.api_server}/#{settings.api_ver}/product_list/" << params[:id]
+    results = HTTParty.get(request_url)
+    @goodlist = results
     slim :goods_info
   end
 
