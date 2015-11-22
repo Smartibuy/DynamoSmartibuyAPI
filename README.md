@@ -75,6 +75,23 @@ $ rake spec
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"group_id\":\"817620721658179\", \"good_id\":\"817620721658179_909156159171301\"}" http://localhost:3000/api/v1/fb_data/search
 ```
 
+**GET /api/vi/group/:id**
+- functionality:
+ - Get group id and name by unique id.
+- request:
+  - method: GET
+  - request url: `http://localhost:3000/api/v1/group/:id`
+- reponse:
+  - 200
+  - 400 - Not found
+```
+{
+  id: 5,
+  group_name: "清交二手貨倉XD",
+  group_id: "817620721658179"
+}
+```
+
 **POST /api/v1/create_group**
 - functionality:
   - Create a group with id and name.
@@ -95,6 +112,25 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"group_id\":\"817620721658179\", \"group_name\":\"清交二手大拍賣XD\"}" http://localhost:3000/api/v1/create_group
 ```
 
+**GET /api/vi/product/:id**
+- functionality:
+ - Get product's informations by unique id.
+- request:
+  - method: GET
+  - request url: `http://localhost:3000/api/v1/product/:id`
+- reponse:
+  - 200
+  - 400 - Not found
+```
+{
+  product_title: "PONY 運動鞋",
+  product_id: "817620721658179_914934681926782",
+  fb_user_id: "rubyuser",
+  product_information: "7-8 可穿",
+  price: 0,
+  group_id: "817620721658179"
+}
+```
 
 **POST /api/v1/create_product**
 - functionality:
