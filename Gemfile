@@ -5,9 +5,9 @@ gem 'sinatra'
 gem 'json'
 
 # Product
+gem 'fuzzy-string-match'
 gem 'secondHandler'
 gem 'shopee'
-gem 'fuzzy-string-match'
 
 gem 'activerecord'
 gem 'sinatra-activerecord'
