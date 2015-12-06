@@ -158,6 +158,17 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  search_mobile01 = lambda do
+    content_type :json
+    begin
+      shopee_worker = ShopeeWorker.new
+    rescue
+      halt 400
+    end
+    puts params[:cate]
+    shopee_worker.search_by_name_cate(params[:cate], params[:name], params[:num]).to_json
+  end
+
   get '/api/state', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
@@ -167,6 +178,9 @@ class ApplicationController < Sinatra::Base
 
   get '/api/v1/product/:id', &get_product
   post '/api/v1/create_product', &create_product
+
+  # shopee
+  get '/api/v1/search_mobile01/:cate/:name/:num/result.json', &search_mobile01
 
   # =============
   # Web UI Routes
