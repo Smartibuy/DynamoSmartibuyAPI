@@ -18,7 +18,7 @@ class Goods
     result = []
     message.each do |good|
       element = {}
-      element['ID'] = good['id']
+      element['ID'] = 'https://www.facebook.com/groups/' << good['id'].split('_')[0] << '/permalink/' << good['id'].split('_')[1]
       element['刊登時間'] = good['updated_time']
       element['商品資訊'] = good['message']
       element['attachments'] = good['attachments']
