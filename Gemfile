@@ -7,6 +7,7 @@ gem 'json'
 # Product
 gem 'secondHandler'
 gem 'shopee'
+gem 'fuzzy-string-match'
 
 gem 'activerecord'
 gem 'sinatra-activerecord'
