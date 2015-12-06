@@ -161,6 +161,26 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"product_id\":\"817620721658179_914934681926782\", \"fb_user_id\":\"rubyuser\", \"product_title\":\"PONY拖鞋\", \"product_information\":\"7-8成新\", \"price\":\"議價\", \"group_id\":\"817620721658179\", \"pic_url\":\"None\", \"update_time\":\"2015-11-08T05:41:08+0000\", \"create_time\":\"2015-11-08T05:41:08+0000\", \"create_at\":\"2015-11-08T05:41:08+0000\", \"update_at\":\"2015-11-08T05:41:08+0000\"}" http://localhost:3000/api/v1/create_product
 ```
 
+**GET /api/v1/search_mobile01/:cate/:name/:num/result.json', **
+- functionality:
+ - Get product list from mobile01 using category and keyword.
+ - :cate is category, in this example, category is 電腦資訊.
+ - :name is keyword, in this example, name is iphone.
+ - :number is the number of result you want to list.
+- request:
+  - method: GET
+  - request url: `/api/v1/search_mobile01/電腦資訊/iphone/5/result.json`
+- reponse:
+  - 200
+  - 400 - Not found
+```
+[
+  {"name":"全新未拆 SP Slicon Power DDR3L 1600 4G 筆記型電腦 記憶體  B40CCD (1)　商品所在地:台北市","price":"  600元","num":"0","update_time":"2015-12-06"},
+  {"name":"iPad mini 羅技 Logitech超薄鍵盤保護殼 黑色.1-3代通用  bluem23 (47)　商品所在地:台北市","price":"  7,299元","num":"2","update_time":"2015-12-06"},
+  {"name":"Micron 固態硬碟SSD crucial 64GB（送中古INTEL X25-V 40GB）  歌丸にゃんこ (9)　商品所在地:新北市","price":"  28,900元","num":"0","update_time":"2015-12-06"},
+  {"name":"ASUS ZENBOOK 13.3吋 Full HD 筆電 Notebook  pcmew (8)　商品所在地:新北市","price":"  2,500元","num":"0","update_time":"2015-12-06"},
+  {"name":"金士頓 KHX1600C9D3K 12GX Hyper X系列  蝸牛小哥哥 (1)　商品所在地:基隆市","price":"  498元","num":"0","update_time":"2015-12-06"}]%
+```
 
 
 
