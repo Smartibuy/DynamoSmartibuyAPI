@@ -21,6 +21,19 @@ class Goods
       element['ID'] = good['id']
       element['刊登時間'] = good['updated_time']
       element['商品資訊'] = good['message']
+      element['attachments'] = good['attachments']
+      begin
+        element['attachments'] = element['attachments']['data'].first['media']['image']['src']
+      rescue
+        puts 'no images'
+      end
+
+      begin
+        element['attachments'] = element['attachments']['data'].first['subattachments']['data'].first['media']['image']['src']
+      rescue
+        puts 'no images'
+      end
+
       result << element
     end
     result.to_json
