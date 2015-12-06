@@ -161,7 +161,7 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"product_id\":\"817620721658179_914934681926782\", \"fb_user_id\":\"rubyuser\", \"product_title\":\"PONY拖鞋\", \"product_information\":\"7-8成新\", \"price\":\"議價\", \"group_id\":\"817620721658179\", \"pic_url\":\"None\", \"update_time\":\"2015-11-08T05:41:08+0000\", \"create_time\":\"2015-11-08T05:41:08+0000\", \"create_at\":\"2015-11-08T05:41:08+0000\", \"update_at\":\"2015-11-08T05:41:08+0000\"}" http://localhost:3000/api/v1/create_product
 ```
 
-** GET /api/v1/search_mobile01/:cate/:name/:num/result.json' **
+**GET /api/v1/search_mobile01/:cate/:name/:num/result.json'**
 - functionality:
  - Get product list from mobile01 using category and keyword.
  - :cate is category, in this example, category is 電腦資訊.
