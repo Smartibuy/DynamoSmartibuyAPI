@@ -11,7 +11,9 @@ gem 'shopee'
 
 gem 'activerecord'
 gem 'sinatra-activerecord'
-gem 'tux'
+gem 'sinatra-contrib'
+gem 'thin'
+
 gem 'hirb'
 gem 'virtus'
 
@@ -21,19 +23,14 @@ gem 'sinatra-flash'
 gem 'slim'
 gem 'tilt'
 
+gem 'activesupport'
+gem 'concurrent-ruby-ext'
+
 # for aws dynamodb
 gem 'config_env'
 gem 'aws-sdk', '~> 2'     # DynamoDB (Dynamoid), SQS Message Queue
 gem 'dynamoid', '~> 1'
 gem 'dalli'               # Memcachier
-
-group :test, :development do
-  gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg'
-end
 
 group :test do
   gem 'rack'
@@ -42,4 +39,8 @@ group :test do
   gem 'minitest'
   gem 'vcr'
   gem 'webmock'
+end
+
+group :development do
+  gem 'tux'
 end

@@ -1,16 +1,15 @@
 ENV['RACK_ENV'] = 'test'
-Dir.glob('./{models,helpers,controllers}/*.rb').each { |file| require file }
 
 require 'minitest/autorun'
 require 'rack/test'
-require 'vcr'
-require 'webmock/minitest'
-require_relative '../controllers/application_controller'
-
+Dir.glob('./{config,models,services,controllers}/init.rb').each do |file|
+  require file
+end
+  
 include Rack::Test::Methods
 
 def app
-  ApplicationController
+  SmartibuyDynamo
 end
 
 

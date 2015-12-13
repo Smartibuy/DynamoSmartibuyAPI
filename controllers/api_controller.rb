@@ -1,4 +1,5 @@
 require 'hirb'
+require 'sinatra/base'
 
 class SmartibuyDynamo < Sinatra::Base
 

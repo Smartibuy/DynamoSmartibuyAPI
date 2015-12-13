@@ -1,10 +1,16 @@
-Dir.glob('./{models,helpers,controllers}/*.rb').each { |file| require file }
-require 'sinatra/activerecord/rake'
 require 'rake/testtask'
+require 'config_env/rake_tasks'
 
-task :default => [:spec]
+task :config do
+  ConfigEnv.path_to_config("#{__dir__}/config/config_env.rb")
+end
 
-desc 'Run specs'
+desc "Echo to stdout an environment variable"
+task :echo_env, [:var] => :config do |t, args|
+  puts "#{args[:var]}: #{ENV[args[:var]]}"
+end
+
+desc 'Run all tests'
 Rake::TestTask.new(name=:spec) do |t|
   t.pattern = 'spec/*_spec.rb'
 end
@@ -12,7 +18,7 @@ end
 namespace :db do
   require_relative 'models/init.rb'
   require_relative 'config/init.rb'
-  
+
   desc "Create groups table"
   task :migrate do
     begin
@@ -22,7 +28,7 @@ namespace :db do
       puts 'Groups table already exists'
     end
   end
-  
+
   desc "Create products table"
   task :migrate do
     begin
