@@ -1,20 +1,8 @@
-require 'sinatra/base'
-require 'sinatra/flash'
-require_relative '../models/sale'
-require 'httparty'
 require 'hirb'
-require 'slim'
 
-
-class ApplicationController < Sinatra::Base
+class SmartibuyDynamo < Sinatra::Base
 
   helpers GoodsHelpers
-  enable :sessions
-  register Sinatra::Flash
-  use Rack::MethodOverride
-
-  set :views, File.expand_path('../../views', __FILE__)
-  set :public_folder, File.expand_path('../../public', __FILE__)
 
   configure do
     Hirb.enable
@@ -182,16 +170,10 @@ class ApplicationController < Sinatra::Base
   # shopee
   get '/api/v1/search_mobile01/:cate/:name/:num/result.json', &search_mobile01
 
-  # =============
-  # Web UI Routes
-  # =============
-
   app_get_root = lambda do
     slim :home
   end
 
   # Web App Views Routes
   get '/', &app_get_root
-
-
 end
