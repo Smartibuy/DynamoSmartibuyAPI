@@ -1,6 +1,6 @@
-#SmartibuyAPI
+#SmartibuyAPI_dynamo
 
-[ ![Codeship Status for Smartibuy/SmartibuyAPI](https://codeship.com/projects/4df54750-62b8-0133-c7a9-32b67f1e3a7d/status?branch=master)](https://codeship.com/projects/112664)
+[ ![Codeship Status for Smartibuy/SmartibuyAPI_dynamo](https://codeship.com/projects/a0e21290-83ac-0133-0c7b-2e117485f168/status?branch=master)](https://codeship.com/projects/121804)
 
 Web service of Smartibuy based on sinatra. （Deployed on Codeship）
 
