@@ -1,3 +1,6 @@
+Dir.glob('./{config,models,services,helpers,controllers}/init.rb').each do |file|
+  require file
+end
 require 'rake/testtask'
 require 'config_env/rake_tasks'
 
@@ -10,10 +13,10 @@ task :echo_env, [:var] => :config do |t, args|
   puts "#{args[:var]}: #{ENV[args[:var]]}"
 end
 
-desc 'Run all tests'
-Rake::TestTask.new(name=:spec) do |t|
-  t.pattern = 'spec/*_spec.rb'
-end
+# desc 'Run all tests'
+# Rake::TestTask.new(name=:spec) do |t|
+#   t.pattern = 'spec/*_spec.rb'
+# end
 
 namespace :db do
   require_relative 'models/init.rb'
