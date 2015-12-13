@@ -1,20 +1,8 @@
-require 'sinatra/base'
-require 'sinatra/flash'
-require_relative '../models/sale'
-require 'httparty'
 require 'hirb'
-require 'slim'
-
 
 class SmartibuyDynamo < Sinatra::Base
 
   helpers GoodsHelpers
-  enable :sessions
-  register Sinatra::Flash
-  use Rack::MethodOverride
-
-  set :views, File.expand_path('../../views', __FILE__)
-  set :public_folder, File.expand_path('../../public', __FILE__)
 
   configure do
     Hirb.enable
@@ -182,56 +170,56 @@ class SmartibuyDynamo < Sinatra::Base
   # shopee
   get '/api/v1/search_mobile01/:cate/:name/:num/result.json', &search_mobile01
 
-  # =============
-  # Web UI Routes
-  # =============
-
-  app_get_root = lambda do
-    slim :home
-  end
-
-  app_get_group = lambda do
-    # for 清交二手貨倉, id is 817620721658179.
-    request_url = "#{settings.api_server}/#{settings.api_ver}/fb_data/" << params[:id] << ".json"
-    results = HTTParty.get(request_url)
-    @goodlist = results
-    slim :goods_info
-  end
-
-  app_post_group =lambda do
-    request_url = "#{settings.api_server}/#{settings.api_ver}/create_group"
-
-    form = CreateGroupForm.new(params)
-    result = CreateGroupFromAPI.new(request_url, form).call
-    if (result.code != 200)
-      flash[:notice] = 'Could not found service'
-      redirect '/group'
-      return nil
-    end
-
-    redirect "/group/#{result.group_id}"
-  end
-
-  create_group = lambda do
-    slim :creategroup
-  end
-
-  search = lambda do
-    slim :search
-  end
-
-  search_good_by_group = lambda do
-    group_id = params[:group_id]
-    puts 'group id: ' << group_id
-    redirect "/group/#{group_id}"
-  end
-
-  # Web App Views Routes
-  get '/', &app_get_root
-  get '/group/:id' , &app_get_group
-  post '/group' ,&app_post_group
-  get '/group', &create_group
-  get '/search', &search
-  post '/search', &search_good_by_group
+  # # =============
+  # # Web UI Routes
+  # # =============
+  #
+  # app_get_root = lambda do
+  #   slim :home
+  # end
+  #
+  # app_get_group = lambda do
+  #   # for 清交二手貨倉, id is 817620721658179.
+  #   request_url = "#{settings.api_server}/#{settings.api_ver}/fb_data/" << params[:id] << ".json"
+  #   results = HTTParty.get(request_url)
+  #   @goodlist = results
+  #   slim :goods_info
+  # end
+  #
+  # app_post_group =lambda do
+  #   request_url = "#{settings.api_server}/#{settings.api_ver}/create_group"
+  #
+  #   form = CreateGroupForm.new(params)
+  #   result = CreateGroupFromAPI.new(request_url, form).call
+  #   if (result.code != 200)
+  #     flash[:notice] = 'Could not found service'
+  #     redirect '/group'
+  #     return nil
+  #   end
+  #
+  #   redirect "/group/#{result.group_id}"
+  # end
+  #
+  # create_group = lambda do
+  #   slim :creategroup
+  # end
+  #
+  # search = lambda do
+  #   slim :search
+  # end
+  #
+  # search_good_by_group = lambda do
+  #   group_id = params[:group_id]
+  #   puts 'group id: ' << group_id
+  #   redirect "/group/#{group_id}"
+  # end
+  #
+  # # Web App Views Routes
+  # get '/', &app_get_root
+  # get '/group/:id' , &app_get_group
+  # post '/group' ,&app_post_group
+  # get '/group', &create_group
+  # get '/search', &search
+  # post '/search', &search_good_by_group
 
 end

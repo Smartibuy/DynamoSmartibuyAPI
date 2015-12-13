@@ -22,8 +22,9 @@ gem 'slim'
 gem 'tilt'
 
 gem 'config_env'
-gem 'aws-sdk', '< 2.0'    # DynamoDB, SQS Message Queue
+gem 'aws-sdk', '~> 2'    # DynamoDB, SQS Message Queue
 gem 'dalli'               # Memcachier
+gem 'dynamoid', '~> 1'
 
 group :test, :development do
   gem 'sqlite3'
