@@ -3,15 +3,14 @@ ruby '2.2.3'
 
 gem 'sinatra'
 gem 'json'
+gem 'sinatra-contrib'
+gem 'thin'
 
 # Product
 gem 'fuzzy-string-match'
 gem 'secondHandler'
 gem 'shopee'
 
-gem 'sinatra-activerecord'
-gem 'sinatra-contrib'
-gem 'thin'
 
 gem 'hirb'
 gem 'virtus'

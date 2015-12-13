@@ -1,8 +1,5 @@
 require 'rake/testtask'
 require 'config_env/rake_tasks'
-Dir.glob('./{config,models,services,helpers,controllers}/init.rb').each do |file|
-  require file
-end
 
 task :config do
   ConfigEnv.path_to_config("#{__dir__}/config/config_env.rb")
@@ -21,6 +18,7 @@ end
 namespace :db do
   require_relative 'models/init.rb'
   require_relative 'config/init.rb'
+  require 'aws-sdk'
 
   desc "Create groups table"
   task :migrate do
