@@ -9,7 +9,6 @@ gem 'fuzzy-string-match'
 gem 'secondHandler'
 gem 'shopee'
 
-gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'sinatra-contrib'
 gem 'thin'
@@ -19,8 +18,6 @@ gem 'virtus'
 
 gem 'httparty'
 
-gem 'sinatra-flash'
-gem 'slim'
 gem 'tilt'
 
 gem 'activesupport'

@@ -170,11 +170,4 @@ class SmartibuyDynamo < Sinatra::Base
 
   # shopee
   get '/api/v1/search_mobile01/:cate/:name/:num/result.json', &search_mobile01
-
-  app_get_root = lambda do
-    slim :home
-  end
-
-  # Web App Views Routes
-  get '/', &app_get_root
 end
