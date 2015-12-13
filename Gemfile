@@ -21,6 +21,11 @@ gem 'sinatra-flash'
 gem 'slim'
 gem 'tilt'
 
+# for aws dynamodb
+gem 'config_env'
+gem 'aws-sdk', '~> 2'     # DynamoDB (Dynamoid), SQS Message Queue
+gem 'dynamoid', '~> 1'
+gem 'dalli'               # Memcachier
 
 group :test, :development do
   gem 'sqlite3'

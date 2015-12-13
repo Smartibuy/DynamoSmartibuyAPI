@@ -1,2 +1,4 @@
 .bundle/
 db/*.db
+# ignore credential
+config/config_env.rb
