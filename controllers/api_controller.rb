@@ -6,7 +6,7 @@ require 'hirb'
 require 'slim'
 
 
-class ApplicationController < Sinatra::Base
+class SmartibuyDynamo < Sinatra::Base
 
   helpers GoodsHelpers
   enable :sessions
