@@ -11,18 +11,6 @@ class SmartibuyDynamo < Sinatra::Base
     set :api_ver, 'api/v1'
   end
 
-  configure :development, :test do
-    set :api_server, 'http://localhost:9292'
-  end
-
-  configure :production do
-    set :api_server, 'smartibuyapidynamo.herokuapp.com'
-  end
-
-  configure :production, :development do
-    enable :logging
-  end
-
   helpers do
     def current_page?(path = ' ')
       path_info = request.path_info

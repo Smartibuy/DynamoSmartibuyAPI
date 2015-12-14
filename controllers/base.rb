@@ -9,16 +9,11 @@ require 'dalli'
 class SmartibuyDynamo  < Sinatra::Base
   configure :development, :test do
     ConfigEnv.path_to_config("#{__dir__}/../config/config_env.rb")
-    set :api_server, 'http://localhost:9292'
   end
 
   configure :development do
     # ignore if not using shotgun in development
     set :session_secret, "fixed secret"
-  end
-
-  configure :production do
-    set :api_server, 'http://smartibuyapidynamo.herokuapp.com'
   end
 
   configure do
