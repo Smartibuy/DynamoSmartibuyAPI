@@ -25,11 +25,10 @@ class SmartibuyDynamo < Sinatra::Base
   # ==========
 
   show_service_state = lambda do
-    'Hello, This is Smartibuy web service. <br>' \
-    'Hope you will enjoy your shoping!<br>'\
+    '<div style="display: table; margin: 0 auto;">Smartibuy Web Service<hr>'\
     "Current API version is #{settings.api_ver}<br>"\
-    'See Homepage at <a href="https://github.com/Smartibuy/DynamoSmartibuyAPI">' \
-    'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.'
+    'See Usage at <a href="https://github.com/Smartibuy/DynamoSmartibuyAPI">' \
+    'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.</div>'
   end
 
   show_group_goods = lambda do
