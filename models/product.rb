@@ -6,11 +6,11 @@ class Product
   field :fb_user_id, :string
   field :product_title, :string
   field :product_information, :string
-  field :price, :string
+  field :price, :number
   field :group_id, :string
   field :pic_url, :string
-  field :update_time, :string
-  field :create_time, :string
+  field :update_time, :datetime
+  field :create_time, :datetime
 
   def self.destroy(id)
     find(id).destroy
