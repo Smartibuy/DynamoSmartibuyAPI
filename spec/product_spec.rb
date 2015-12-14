@@ -30,7 +30,7 @@ describe 'Checking create product' do
 
     #check location format
     next_location = last_response.location
-    next_location.must_match %r{api\/v1\/product\/\d+}
+    next_location.must_match %r{http:\/\/example.org\/api\/v1\/product\/\w+}
   end
 
   it 'should return bad request' do

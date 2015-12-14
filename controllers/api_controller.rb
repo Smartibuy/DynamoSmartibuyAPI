@@ -1,15 +1,8 @@
-require 'hirb'
 require 'sinatra/base'
 
 class SmartibuyDynamo < Sinatra::Base
 
   helpers GoodsHelpers
-
-  configure do
-    Hirb.enable
-    set :session_secret, 'smartibuyisgood'
-    set :api_ver, 'api/v1'
-  end
 
   helpers do
     def current_page?(path = ' ')

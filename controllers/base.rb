@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'active_support'
 require 'active_support/core_ext'
+require 'hirb'
 
 require 'config_env'
 require 'aws-sdk'
@@ -9,11 +10,23 @@ require 'dalli'
 class SmartibuyDynamo  < Sinatra::Base
   configure :development, :test do
     ConfigEnv.path_to_config("#{__dir__}/../config/config_env.rb")
+
+    set :api_server, 'http://localhost:9292'
   end
 
   configure :development do
     # ignore if not using shotgun in development
     set :session_secret, "fixed secret"
+  end
+
+  configure do
+    Hirb.enable
+    set :session_secret, 'smartibuyisgood'
+    set :api_ver, 'api/v1'
+  end
+
+  configure :production do
+    set :api_server, 'http://smartibuyapidynamo.herokuapp.com'
   end
 
   configure do
