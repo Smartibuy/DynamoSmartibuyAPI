@@ -55,6 +55,7 @@ GEM
       RubyInline (>= 3.8.6)
     hashdiff (0.2.3)
     highline (1.7.8)
+    hirb (0.7.3)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -143,6 +144,7 @@ DEPENDENCIES
   dalli
   dynamoid (~> 1)
   fuzzy-string-match
+  hirb
   httparty
   json
   minitest
