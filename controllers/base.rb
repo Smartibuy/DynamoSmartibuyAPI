@@ -21,12 +21,21 @@ class SmartibuyDynamo  < Sinatra::Base
     set :api_server, 'http://smartibuyapidynamo.herokuapp.com'
   end
 
-  configure :production, :development do
-    enable :logging
+  configure do
+    set :cadet_cache, Dalli::Client.new((ENV["MEMCACHIER_SERVERS"] || "").split(","),
+      {:username => ENV["MEMCACHIER_USERNAME"],
+        :password => ENV["MEMCACHIER_PASSWORD"],
+        :socket_timeout => 1.5,
+        :socket_failure_delay => 0.2
+        })
+    set :cadet_cache_ttl, 1.day    # 24hrs
+
+    set :cadet_queue, Aws::SQS::Client.new(region: ENV['AWS_REGION'])
+    set :cadet_queue_name, 'RecentCadet'
   end
 
-  configure do
-    set :api_ver, 'api/v1'
+  configure :production, :development do
+    enable :logging
   end
 
   before do

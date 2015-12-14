@@ -2,10 +2,10 @@ require_relative 'spec_helper'
 require 'json'
 
 describe 'Searching with group ID and goods' do
-  
+
   it 'should return ok' do
     header = { 'CONTENT_TYPE' => 'application/json' }
-    body = { 
+    body = {
       "group_id" => SECOND_HAND_GID,
       "good_id" => VAILD_GOOD_ID
     }
@@ -14,7 +14,7 @@ describe 'Searching with group ID and goods' do
     end
     last_response.must_be :ok?
   end
-  
+
   it 'should return bad request for bad format' do
     header = { 'CONTENT_TYPE' => 'application/json' }
     body = VAILD_GOOD_ID

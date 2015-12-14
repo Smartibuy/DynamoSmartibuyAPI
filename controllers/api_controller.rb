@@ -158,7 +158,7 @@ class SmartibuyDynamo < Sinatra::Base
     shopee_worker.search_by_name_cate(params[:cate], params[:name], params[:num]).to_json
   end
 
-  get '/api/state', &show_service_state
+  get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
 
