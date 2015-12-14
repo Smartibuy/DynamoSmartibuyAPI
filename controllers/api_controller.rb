@@ -28,7 +28,7 @@ class SmartibuyDynamo < Sinatra::Base
     'Hello, This is Smartibuy web service. <br>' \
     'Hope you will enjoy your shoping!<br>'\
     "Current API version is #{settings.api_ver}<br>"\
-    'See Homepage at <a href="https://github.com/Smartibuy">' \
+    'See Homepage at <a href="https://github.com/Smartibuy/DynamoSmartibuyAPI">' \
     'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.'
   end
 
