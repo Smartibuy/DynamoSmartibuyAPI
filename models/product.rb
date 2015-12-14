@@ -21,4 +21,5 @@ class Product
   def self.delete_all
     all.each(&:delete)
   end
+  
 end
