@@ -5,6 +5,8 @@ ruby '2.2.3'
 gem 'thin'
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'virtus'
+
 # Product
 gem 'secondHandler'
 gem 'shopee'
