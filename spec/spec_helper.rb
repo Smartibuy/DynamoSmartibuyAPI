@@ -1,5 +1,4 @@
 ENV['RACK_ENV'] = 'test'
-ENV['AWS_REGION'] = 'ap-northeast-1'
 
 require 'minitest/autorun'
 require 'rack/test'
