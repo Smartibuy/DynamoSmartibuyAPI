@@ -5,9 +5,9 @@ describe 'Checking create product' do
   before do
     Product.delete_all
   end
-  
+
   header = { 'CONTENT_TYPE' => 'application/json' }
-  body = { 
+  body = {
     "product_id"=> "914934681926782",
     "fb_user_id"=> "000000000000000",
     "product_title"=> "surface 4 pro",
@@ -22,23 +22,23 @@ describe 'Checking create product' do
   }
 
   it 'should return vaild url' do
-    
+
     post '/api/v1/create_product', body.to_json, header
-    
+
     #check response code
     last_response.must_be :redirect?
-    
+
     #check location format
     next_location = last_response.location
     next_location.must_match %r{api\/v1\/product\/\d+}
   end
-  
+
   it 'should return bad request' do
-    
+
     post '/api/v1/create_product', "", header
-    
+
     #check response code
     last_response.must_be :bad_request?
-    
+
   end
 end
