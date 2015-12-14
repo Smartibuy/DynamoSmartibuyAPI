@@ -5,8 +5,13 @@ ruby '2.2.3'
 gem 'thin'
 gem 'sinatra'
 gem 'sinatra-contrib'
-gem 'codebadges'
+# Product
+gem 'secondHandler'
+gem 'shopee'
+
+gem 'fuzzy-string-match'
 gem 'json'
+gem 'httparty'
 
 gem 'activesupport'
 gem 'concurrent-ruby-ext'
@@ -22,6 +27,9 @@ group :test do
   gem 'rack'
   gem 'rack-test'
   gem 'rake'
+  gem 'minitest'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

@@ -3,10 +3,10 @@ ENV['AWS_REGION'] = 'ap-northeast-1'
 
 require 'minitest/autorun'
 require 'rack/test'
-require 'vcr'
-require 'webmock/minitest'
+# require 'vcr'
+# require 'webmock/minitest'
 
-Dir.glob('./{config,models,services,controllers}/init.rb').each do |file|
+Dir.glob('./{config,models,services,controllers, helpers}/init.rb').each do |file|
   require file
 end
 
@@ -17,10 +17,10 @@ def app
 end
 
 
-VCR.configure do |config|
-  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
-  config.hook_into :webmock # or :fakeweb
-end
+# VCR.configure do |config|
+#   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+#   config.hook_into :webmock # or :fakeweb
+# end
 
 SECOND_HAND_GID = "817620721658179"
 EMPTY_SECOND_HAND_GID = "0000000"

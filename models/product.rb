@@ -6,7 +6,7 @@ class Product
   field :fb_user_id, :string
   field :product_title, :string
   field :product_information, :string
-  field :price, :integer
+  field :price, :string
   field :group_id, :string
   field :pic_url, :string
   field :update_time, :string

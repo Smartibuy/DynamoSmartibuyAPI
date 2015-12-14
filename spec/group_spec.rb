@@ -2,19 +2,19 @@ require_relative 'spec_helper'
 require 'json'
 
 describe 'Getting group ID goods' do
-  it 'Should return ok' do
-    VCR.use_cassette('valid_fb_group') do
-      get "/api/v1/fb_data/#{SECOND_HAND_GID}.json"
-    end
-    last_response.must_be :ok?
-  end
-
-  it 'Should return not found' do
-    VCR.use_cassette('empty_fb_group') do
-      get "/api/v1/fb_data/#{EMPTY_SECOND_HAND_GID}.json"
-    end
-    last_response.must_be :not_found?
-  end
+  # it 'Should return ok' do
+  #   VCR.use_cassette('valid_fb_group') do
+  #     get "/api/v1/fb_data/#{SECOND_HAND_GID}.json"
+  #   end
+  #   last_response.must_be :ok?
+  # end
+  #
+  # it 'Should return not found' do
+  #   VCR.use_cassette('empty_fb_group') do
+  #     get "/api/v1/fb_data/#{EMPTY_SECOND_HAND_GID}.json"
+  #   end
+  #   last_response.must_be :not_found?
+  # end
 end
 
 describe 'Checking create group' do
