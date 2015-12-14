@@ -34,6 +34,12 @@ Run testing
 $ rake spec
 ```
 
+DynamoDB Configuration
+
+```
+$ rake config_env:heroku[smartibuyapidynamo] # setting config
+$ RACK_ENV=production rake db:migrate
+```
 
 # API usage
 **GET /**
