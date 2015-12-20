@@ -5,7 +5,7 @@ require 'rack/test'
 # require 'vcr'
 # require 'webmock/minitest'
 
-Dir.glob('./{config,models,services,controllers, helpers}/init.rb').each do |file|
+Dir.glob('./{config,models,controllers, helpers}/init.rb').each do |file|
   require file
 end
 
