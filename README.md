@@ -23,19 +23,19 @@ Maximum connections set to 1024
 Listening on localhost:[port], CTRL+C to stop
 ```
 
-If you want to run in test environment.
+**If you want to run in test environment.**
 ```sh
-$ rackup config.ru -p 3000 -E test
+$ rackup config.ru -p <port> -E test
 ```
 
-Run testing
-
+**Run testing**
 ```sh
 $ rake spec
 ```
 
-DynamoDB Configuration
-
+**DynamoDB Configuration**
+You have required to set up the aws credential on `codeship` and `heroku`  
+We use `env_config` gem to set the credential to heroku remotely.  
 ```
 $ rake config_env:heroku[smartibuyapidynamo] # setting config
 $ RACK_ENV=production rake db:migrate
@@ -189,9 +189,14 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
   {"name":"金士頓 KHX1600C9D3K 12GX Hyper X系列  蝸牛小哥哥 (1)　商品所在地:基隆市","price":"  498元","num":"0","update_time":"2015-12-06"}]%
 ```
 
-
-
-
 LICENSE
 ==
-MIT @ Smartibuy
+The MIT License (MIT)
+
+Copyright (c) 2015 Smartubuy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
