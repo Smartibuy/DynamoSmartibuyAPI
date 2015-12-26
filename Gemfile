@@ -30,7 +30,6 @@ group :test do
   gem 'rack'
   gem 'rack-test'
   gem 'rake'
-  gem 'minitest'
   gem 'vcr'
   gem 'webmock'
 end
