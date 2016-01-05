@@ -2,6 +2,8 @@ require 'sinatra/base'
 
 class SmartibuyDynamo < Sinatra::Base
   queue_search = Queue_for_search.new
+  queue_cate = Queue_for_cate.new
+
   helpers GoodsHelpers
 
   helpers do
@@ -144,6 +146,15 @@ class SmartibuyDynamo < Sinatra::Base
     queue_search.enqueue(keyword)
   end
 
+  add_keyword_into_cate_queue = lambda do
+    cate = params[:cate]
+    queue_search.enqueue(cate)
+  end
+
+  # show_hot_keyword = lamda do
+  #
+  # end
+
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
@@ -156,7 +167,14 @@ class SmartibuyDynamo < Sinatra::Base
 
   # shopee
   get '/api/v1/search_mobile01/:cate/:name/:num/result.json', &search_mobile01
+
+  # enqueue
   post '/api/v1/add_keyword_to_search_queue/:keyword', &add_keyword_into_search_queue
+  post '/api/v1/add_keyword_to_cate_queue/:cate', &add_keyword_into_cate_queue
+
+  #get the hot keyword
+  # post '/api/v1/hot_key_word', &show_hot_keyword
+
 
 
 end
