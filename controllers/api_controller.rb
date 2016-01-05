@@ -148,7 +148,7 @@ class SmartibuyDynamo < Sinatra::Base
 
   add_keyword_into_cate_queue = lambda do
     cate = params[:cate]
-    queue_search.enqueue(cate)
+    queue_cate.enqueue(cate)
   end
 
   # show_hot_keyword = lamda do
