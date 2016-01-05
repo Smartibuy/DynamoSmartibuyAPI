@@ -3,18 +3,51 @@ require 'json'
 
 
 class Goods
-  attr_reader :id, :message
-  def initialize(id=nil)
+  attr_reader :id, :page_token, :timestamp, :group
+  def initialize(id, page, timestamp)
     @id = id
-    @message = load_Info_by_id(id)
+    @page_token = page
+    @timestamp = timestamp
+    @group = SecondHandler::FbGroupPost.new('1517291225230751|o7NH0AUs5hiQRZpCTq2Q_9gZf0w', id)
+    
   end
-
-  def load_Info_by_id(id)
-    fb = SecondHandler::FbGroupPost.new('1517291225230751|o7NH0AUs5hiQRZpCTq2Q_9gZf0w', id)
-    page = fb.first_page
+  
+  def read_current_page_json
+    
+    if @page_token.nil? or  @timestamp.nil?
+      @group.first_page
+    else
+      @group.specified_page(@page_token,@timestamp)
+    end
+    proccess_data.to_json  
+  
   end
-
+  
+  def proccess_data 
+    data = @group.get_content
+    next_page = @group.next_page_params.last
+    if data.empty?
+      {
+        "data" => [],
+        "prev" => nil,
+        "next" => nil,
+      }
+    else
+      {
+        "data" => data,
+        "prev" => {},
+        "next" => {
+          "timestamp" => next_page["until"],
+          "page" => next_page["__paging_token"]
+        },
+      }
+    end
+      
+  end
+   
   def to_jsonlist
+    fb = SecondHandler::FbGroupPost.new('1517291225230751|o7NH0AUs5hiQRZpCTq2Q_9gZf0w', id)
+    message = fb.first_page
     result = []
     message.each do |good|
       element = {}
