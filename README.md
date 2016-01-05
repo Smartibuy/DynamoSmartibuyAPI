@@ -51,7 +51,8 @@ $ RACK_ENV=production rake db:migrate
 ```bash
  curl -GET http://127.0.0.1:3000/
 ```
-**GET /api/v1/fb_data/[facebook group id].json**
+**(Depreciated) GET /api/v1/fb_data/[facebook group id].json**
+- please move to use  `GET /api/v1/fb_data/[facebook group id]/goods?timestamp=[timestamp]&page=[page_token]`
 - functionality:
   - Show all good infomation in the certian FB group
 - response :
@@ -61,6 +62,54 @@ $ RACK_ENV=production rake db:migrate
 ```bash
  curl -GET http://127.0.0.1:3000/api/v1/fb_data/817620721658179.json
 ```
+
+**GET /api/v1/fb_data/[facebook group id]/goods?timestamp=[timestamp]&page=[page_token]**
+- functionality:
+  - Show all good infomation in the certian FB group by paging cursor
+  - Give next page infomation to client
+- parameter
+  - [facebook group id] : fb group id
+  - timestamp: (optional)timestamp, given by this api call to get specified page
+  - page: (optional) page_token, given by this api call to get specified page
+  - NOTE:if timestamp or page is not specified, it will return 25 post of specified group from the first one
+- response code:
+  - 200, return in **application/json** format
+  - 404, the facebook group is not existed.
+- example:
+```bash
+ curl -GET http://127.0.0.1:3000/api/v1/fb_data/817620721658179/goods?timestamp=[timestamp]&page=[page_token]
+ curl -GET http://127.0.0.1:3000/api/v1/fb_data/817620721658179/goods
+```
+- response data format when reponse code is 200OK:
+```
+{ 
+  data:[{
+    "id":"0000000_0000000", //feed id
+    "message":"OOOO", 
+    "updated_time":"2015-11-08T00:00:00+0000", 
+    "attachments":[
+       {"height":720, "src":"http://www.example.com", "width":405},...
+    ], //post images
+    "from":{
+      "id":"000000000",//user's fbid
+      "name":"My name", //user's fbname
+      "picture":{"is_silhouette":false, "url":"http://www.example.com"} //user's profile picture
+    }
+   },....],
+  next:{
+    "timestamp":[timestamp]
+    "page":[page_token]
+  },
+  prev:{
+    #reserve to prev cursor
+  },
+},
+```
+
+
+
+
+
 
 **POST /api/v1/fb_data/search**
 - functionality:
