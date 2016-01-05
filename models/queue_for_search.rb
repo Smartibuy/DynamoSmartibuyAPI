@@ -1,5 +1,5 @@
 require 'aws-sdk'
-require './config/config_env.rb'
+# require './config/config_env.rb'
 
 class Queue_for_search
 
