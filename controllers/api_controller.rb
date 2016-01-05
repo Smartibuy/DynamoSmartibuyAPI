@@ -22,7 +22,7 @@ class SmartibuyDynamo < Sinatra::Base
     'Hope you will enjoy your shoping!<br>'\
     "Current API version is #{settings.api_ver}<br>"\
     'See Homepage at <a href="https://github.com/Smartibuy/DynamoSmartibuyAPI">' \
-  #  'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.'
+    'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.'
   end
 
   show_group_goods = lambda do
