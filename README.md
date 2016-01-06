@@ -94,7 +94,9 @@ $ RACK_ENV=production rake db:migrate
       "id":"000000000",//user's fbid
       "name":"My name", //user's fbname
       "picture":{"is_silhouette":false, "url":"http://www.example.com"} //user's profile picture
-    }
+    },
+    "like_count":0,
+    "comment_count":0,
    },....],
   next:{
     "timestamp":[timestamp]
