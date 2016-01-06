@@ -16,12 +16,12 @@ GEM
     addressable (2.3.8)
     ansi (1.5.0)
     ast (2.2.0)
-    aws-sdk (2.2.8)
-      aws-sdk-resources (= 2.2.8)
-    aws-sdk-core (2.2.8)
+    aws-sdk (2.2.9)
+      aws-sdk-resources (= 2.2.9)
+    aws-sdk-core (2.2.9)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.2.8)
-      aws-sdk-core (= 2.2.8)
+    aws-sdk-resources (2.2.9)
+      aws-sdk-core (= 2.2.9)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -92,7 +92,7 @@ GEM
       ansi
       ast
     safe_yaml (1.0.4)
-    secondHandler (1.1.0)
+    secondHandler (1.1.2)
       commander
       koala
     shopee (0.1.2)
@@ -114,7 +114,7 @@ GEM
       eventmachine (~> 1.0, >= 1.0.4)
       rack (~> 1.0)
     thread_safe (0.3.5)
-    tilt (2.0.1)
+    tilt (2.0.2)
     tux (0.3.0)
       ripl (>= 0.3.5)
       ripl-multi_line (>= 0.2.4)

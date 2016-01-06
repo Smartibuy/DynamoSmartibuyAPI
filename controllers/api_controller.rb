@@ -151,6 +151,7 @@ class SmartibuyDynamo < Sinatra::Base
     list = get_all_information(params[:id], params[:timestamp], params[:page])
     list.read_current_page_json
   end
+  
 
   add_keyword_into_cate_queue = lambda do
     cate = params[:cate]
@@ -221,9 +222,12 @@ class SmartibuyDynamo < Sinatra::Base
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
-
+  
+  # get '/api/v1/fb_data/goods/:good_id', &read_good_post
+  # get '/api/v1/fb_data/goods/:good_id/comments', &read_good_comments
   get '/api/v1/fb_data/:id/goods', &read_group_post
 
+  
   get '/api/v1/group/:id', &get_group
   post '/api/v1/create_group', &create_group
 
