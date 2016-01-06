@@ -169,7 +169,7 @@ class SmartibuyDynamo < Sinatra::Base
     time_stamp = Time.now.to_s
     cate_data = req['cate_data']
     hot_cate_data = Hot_Cate.new(time: time_stamp,
-                                 cate: cate_data.to_s)
+                                 cate: cate_data)
     if hot_cate_data.save
      status 201
     else
@@ -189,12 +189,33 @@ class SmartibuyDynamo < Sinatra::Base
     time_stamp = Time.now.to_s
     key_data = req['key_data']
     hot_key_data = Hot_Keyword.new(time: time_stamp,
-                                 key: key_data.to_s)
+                                 key: key_data)
     if hot_key_data.save
      status 201
     else
       halt 500, 'Failed to save keyword.'
     end
+  end
+
+  get_hot_data = lambda do
+    begin
+      if params[:type] == 'keyword'
+        index = Hot_Keyword.all.map do |t|
+          { key: t.key, time: t.time,
+            created_at: t.created_at, updated_at: t.updated_at }
+        end
+      else
+        index = Hot_Cate.all.map do |t|
+          { cate: t.cate, time: t.time,
+            created_at: t.created_at, updated_at: t.updated_at }
+        end
+      end
+    rescue
+      halt 400
+    end
+
+    index.to_json
+    
   end
 
   get '/', &show_service_state
@@ -219,6 +240,8 @@ class SmartibuyDynamo < Sinatra::Base
   # post the hot keyword
   post '/api/v1/save_hot_key_word', &save_hot_keyword
   post '/api/v1/save_hot_cate', &save_hot_cate
+
+  get '/api/v1/hot/:type', &get_hot_data
 
 
 
