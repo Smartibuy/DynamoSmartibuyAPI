@@ -288,7 +288,7 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
   - 400 - Not found
 - example:
 ```bash
-$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"key_data\":\"{"htc":1, "apple":2}\"}" http://localhost:9292/api/v1/save_hot_cate
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"cate_data\":\"{"htc":1, "apple":2}\"}" http://localhost:9292/api/v1/save_hot_cate
 ```
 
 LICENSE
