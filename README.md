@@ -82,11 +82,11 @@ $ RACK_ENV=production rake db:migrate
 ```
 - response data format when reponse code is 200OK:
 ```
-{ 
+{
   data:[{
     "id":"0000000_0000000", //feed id
-    "message":"OOOO", 
-    "updated_time":"2015-11-08T00:00:00+0000", 
+    "message":"OOOO",
+    "updated_time":"2015-11-08T00:00:00+0000",
     "attachments":[
        {"height":720, "src":"http://www.example.com", "width":405},...
     ], //post images
@@ -236,6 +236,59 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
   {"name":"Micron 固態硬碟SSD crucial 64GB（送中古INTEL X25-V 40GB）  歌丸にゃんこ (9)　商品所在地:新北市","price":"  28,900元","num":"0","update_time":"2015-12-06"},
   {"name":"ASUS ZENBOOK 13.3吋 Full HD 筆電 Notebook  pcmew (8)　商品所在地:新北市","price":"  2,500元","num":"0","update_time":"2015-12-06"},
   {"name":"金士頓 KHX1600C9D3K 12GX Hyper X系列  蝸牛小哥哥 (1)　商品所在地:基隆市","price":"  498元","num":"0","update_time":"2015-12-06"}]%
+```
+
+
+**POST /api/v1/add_keyword_to_search_queue/:keyword**
+- functionality:
+  - Push keyword into AWS keyword queue.
+- request :
+  - Content-type: application/json
+- response:
+  - 200
+  - 400 - Not found
+- example:
+```bash
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST http://127.0.0.1:9292/api/v1/add_keyword_to_search_queue/手機htc
+```
+
+**POST /api/v1/add_keyword_to_cate_queue/:cate**
+- functionality:
+  - Push category into AWS keyword queue.
+- request :
+  - Content-type: application/json
+- response:
+  - 200
+  - 400 - Not found
+- example:
+```bash
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST http://smartibuyapidynamo.herokuapp.com/api/v1/add_keyword_to_cate_queue/手機
+```
+
+**POST /api/v1/save_hot_key_word**
+- functionality:
+  - Save hot keywords into DB.
+- request :
+  - Content-type: application/json
+- response:
+  - 201
+  - 400 - Not found
+- example:
+```bash
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"key_data\":\"{"htc":1, "手機":2}\"}" http://localhost:9292/api/v1/save_hot_key_word
+```
+
+**POST /api/v1/save_hot_cate**
+- functionality:
+  - Save hot categories into DB.
+- request :
+  - Content-type: application/json
+- response:
+  - 201
+  - 400 - Not found
+- example:
+```bash
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"key_data\":\"{"htc":1, "apple":2}\"}" http://localhost:9292/api/v1/save_hot_cate
 ```
 
 LICENSE
