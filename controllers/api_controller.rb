@@ -24,7 +24,7 @@ class SmartibuyDynamo < Sinatra::Base
     'Hope you will enjoy your shoping!<br>'\
     "Current API version is #{settings.api_ver}<br>"\
     'See Homepage at <a href="https://github.com/Smartibuy/DynamoSmartibuyAPI">' \
-    'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.'
+    # 'Github repo</a><br> It\'s in ' << ENV['RACK_ENV'] << ' mode.'
   end
 
   show_group_goods = lambda do
@@ -45,7 +45,8 @@ class SmartibuyDynamo < Sinatra::Base
   get_group = lambda do
     content_type :json
     begin
-      group = Group.find(params[:id])
+      group_a = Group.where(:group_id => params[:id]).all
+      group = group_a[0]
       group_name = group.group_name
       group_id = group.group_id
       logger.info({ id: group.id, group_name: group_name, group_id: group_id }.to_json)
@@ -145,7 +146,7 @@ class SmartibuyDynamo < Sinatra::Base
     keyword = params[:keyword]
     queue_search.enqueue(keyword)
   end
-  
+
   read_group_post = lambda do
     list = get_all_information(params[:id], params[:timestamp], params[:page])
     list.read_current_page_json
@@ -156,9 +157,27 @@ class SmartibuyDynamo < Sinatra::Base
     queue_cate.enqueue(cate)
   end
 
-  # show_hot_keyword = lamda do
-  #
-  # end
+  save_hot_keyword = lambda do
+
+    content_type :json
+    begin
+      req = JSON.parse(request.body.read)
+      logger.info req
+    rescue
+      halt 400
+    end
+
+    time_stamp = Time.now.to_s
+    # cate_data = {"a": 1, "b": 2}
+    cate_data = req['cate_data']
+    hot_cate_data = Hot_Cate.new(time: time_stamp,
+                                 cate: cate_data.to_s)
+    if hot_cate_data.save
+     status 201
+    else
+      halt 500, 'Failed to save keyword.'
+    end
+  end
 
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
@@ -179,8 +198,8 @@ class SmartibuyDynamo < Sinatra::Base
   post '/api/v1/add_keyword_to_search_queue/:keyword', &add_keyword_into_search_queue
   post '/api/v1/add_keyword_to_cate_queue/:cate', &add_keyword_into_cate_queue
 
-  #get the hot keyword
-  # post '/api/v1/hot_key_word', &show_hot_keyword
+  # post the hot keyword
+  post '/api/v1/save_hot_key_word', &save_hot_keyword
 
 
 
