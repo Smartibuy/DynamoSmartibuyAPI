@@ -312,6 +312,21 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"email\":\"katy@qq\", \"hashtag\":\"[apple, 電腦]\"}" http://localhost:9292/api/v1/update_user_date/katy12
 ```
 
+**GET /api/v1/get_user_date/:id'**
+- functionality:
+ - Get user info from db
+- request:
+  - method: GET
+  - request url: `api/v1/get_user_date/:id`
+- reponse:
+  - 200
+  - 500 - There is no this user info.
+- example:
+```bash
+$ curl -GET http://127.0.0.1:9292/api/v1/get_user_date/katy12
+$ {"id":"katy12","email":"katy@qq","hashtag":"[apple, 電腦]"}%
+```
+
 LICENSE
 ==
 The MIT License (MIT)
