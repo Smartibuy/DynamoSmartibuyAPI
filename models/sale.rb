@@ -4,6 +4,10 @@ require 'json'
 
 class Goods
   attr_reader :id, :page_token, :timestamp, :group
+  def self.shops
+    {"data" => SecondHandler.read_parsed_info('1517291225230751|o7NH0AUs5hiQRZpCTq2Q_9gZf0w')}.to_json
+  end
+    
   def initialize(id, page, timestamp)
     @id = id
     @page_token = page
