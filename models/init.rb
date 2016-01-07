@@ -6,4 +6,6 @@ require_relative 'queue_for_search'
 require_relative 'queue_for_cate'
 require_relative 'hot_cate'
 require_relative 'hot_keyword'
+require_relative 'fb_good'
 require_relative 'user'
+

@@ -152,7 +152,23 @@ class SmartibuyDynamo < Sinatra::Base
     list = get_all_information(params[:id], params[:timestamp], params[:page])
     list.read_current_page_json
   end
-
+  read_good_post = lambda do 
+    content_type :json
+    puts params[:good_id]
+    puts params[:token]
+    puts params[:action]
+    one_good = get_one_good(params[:good_id])
+    one_good.good_info_json
+  end
+  
+  read_good_comments = lambda do 
+    content_type :json
+    puts params[:good_id]
+    puts params[:token]
+    puts params[:action]
+    one_good = get_one_good(params[:good_id], params[:token], params[:action])
+    one_good.comments_json
+  end
 
   add_keyword_into_cate_queue = lambda do
     cate = params[:cate]
@@ -263,8 +279,8 @@ class SmartibuyDynamo < Sinatra::Base
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
 
-  # get '/api/v1/fb_data/goods/:good_id', &read_good_post
-  # get '/api/v1/fb_data/goods/:good_id/comments', &read_good_comments
+  get '/api/v1/fb_data/goods/:good_id', &read_good_post
+  get '/api/v1/fb_data/goods/:good_id/comments', &read_good_comments
   get '/api/v1/fb_data/:id/goods', &read_group_post
 
 

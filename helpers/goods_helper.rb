@@ -13,4 +13,8 @@ module GoodsHelpers
       halt 404
     end  
   end
+  
+   def get_one_good(fid,token=nil,action=nil)
+     FbGood.new(fid,token,action)
+   end
 end
