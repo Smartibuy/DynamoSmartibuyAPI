@@ -220,6 +220,45 @@ class SmartibuyDynamo < Sinatra::Base
 
   end
 
+
+  save_user_info = lambda do
+    content_type :json
+    begin
+      req = JSON.parse(request.body.read)
+      logger.info req
+    rescue
+      halt 400
+    end
+
+    user_id = params[:id]
+    email = req['email']
+    hashtag = req['hashtag']
+
+    user_a = User.where(:id => user_id).all
+
+    if user_a[0] == nil
+      user_data = User.new(id: user_id, email: email, hashtag: hashtag)
+      if user_data.save
+       status 201
+      else
+        halt 500, 'Failed to save keyword.'
+      end
+    else
+      user = user_a[0]
+      user.email = email
+      user.hashtag = hashtag
+
+      if user.save
+       status 201
+      else
+        halt 500, 'Failed to save keyword.'
+      end
+
+    end
+  end
+
+
+
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
@@ -248,6 +287,8 @@ class SmartibuyDynamo < Sinatra::Base
 
   get '/api/v1/hot/:type', &get_hot_data
 
+  #update user data
+  post '/api/v1/update_user_date/:id', &save_user_info
 
 
 end
