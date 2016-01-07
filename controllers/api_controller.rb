@@ -273,6 +273,21 @@ class SmartibuyDynamo < Sinatra::Base
     end
   end
 
+  get_user_info = lambda do
+    user_a = User.where(:id => params[:id]).all
+    index = {}
+    if user_a[0] != nil
+      index['id'] =  user_a[0].id
+      index['email'] = user_a[0].email
+      index['hashtag'] = user_a[0].hashtag
+      index.to_json
+    else
+      halt 500, 'There is no this user info.'
+    end
+
+
+  end
+
 
 
   get '/', &show_service_state
@@ -303,8 +318,8 @@ class SmartibuyDynamo < Sinatra::Base
 
   get '/api/v1/hot/:type', &get_hot_data
 
-  #update user data
+  #update&get user data
   post '/api/v1/update_user_date/:id', &save_user_info
-
+  get '/api/v1/get_user_date/:id', &get_user_info
 
 end
