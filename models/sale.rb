@@ -25,7 +25,6 @@ class Goods
   
   def proccess_data 
     data = @group.get_content
-    next_page = @group.next_page_params.last
     if data.empty?
       {
         "data" => [],
@@ -33,6 +32,7 @@ class Goods
         "next" => nil,
       }
     else
+      next_page = @group.next_page_params.last
       {
         "data" => data,
         "prev" => {},
