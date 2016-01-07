@@ -51,6 +51,43 @@ $ RACK_ENV=production rake db:migrate
 ```bash
  curl -GET http://127.0.0.1:3000/
 ```
+**GET /api/v1/fb_data/shops**
+- functionality:
+  - supported and parsed shops
+- response :
+  - 200, parsed shops
+- example:
+```bash
+ curl -GET http://127.0.0.1:3000/api/v1/fb_data/shops
+```
+- example output
+``` json
+{
+  "data": [
+    {
+      "name": "二手智慧型手機,平板交流",
+      "privacy": "OPEN",
+      "id": "1730742887066429"
+    },
+    {
+      "name": "大台南二手交流、買賣公開社團",
+      "privacy": "OPEN",
+      "id": "144498012423141"
+    },
+    {
+      "name": "新竹二手跳蚤市場",
+      "privacy": "OPEN",
+      "id": "107793636088378"
+    },
+    {
+      "name": "交大二手大賣場",
+      "privacy": "OPEN",
+      "id": "191505604299442"
+    }
+  ]
+```
+
+
 **(Depreciated) GET /api/v1/fb_data/[facebook group id].json**
 - please move to use  `GET /api/v1/fb_data/[facebook group id]/goods?timestamp=[timestamp]&page=[page_token]`
 - functionality:
@@ -86,6 +123,8 @@ $ RACK_ENV=production rake db:migrate
   data:[{
     "id":"0000000_0000000", //feed id
     "message":"OOOO",
+    "price":5000 # show if in parsed list in http://127.0.0.1:3000/api/v1/fb_data/shops
+    "title":"sell ticket" # show if in parsed list in http://127.0.0.1:3000/api/v1/fb_data/shops
     "updated_time":"2015-11-08T00:00:00+0000",
     "attachments":[
        {"height":720, "src":"http://www.example.com", "width":405},...
