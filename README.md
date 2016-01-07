@@ -293,6 +293,25 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"cate_data\":\"{"htc":1, "apple":2}\"}" http://localhost:9292/api/v1/save_hot_cate
 ```
 
+**POST /api/v1/update_user_date/:userid**
+- functionality:
+  - Update user info into DB
+- request :
+  - Content-type: application/json
+  ```
+    {
+      "email":"[E-Mail]", # (string)
+      "hashtag": "[hashtag list]", # (string)
+    }
+  ```
+- response
+  - 201
+  - 400 - Not found
+- example:
+```bash
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"email\":\"katy@qq\", \"hashtag\":\"[apple, 電腦]\"}" http://localhost:9292/api/v1/update_user_date/katy12
+```
+
 LICENSE
 ==
 The MIT License (MIT)
