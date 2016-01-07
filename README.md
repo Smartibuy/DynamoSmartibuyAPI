@@ -108,8 +108,70 @@ $ RACK_ENV=production rake db:migrate
 },
 ```
 
-
-
+**GET /api/v1/fb_data/goods/[good_id]**
+- functionality:
+  - Show **one** good infomation in the certian FB group by paging cursor
+- parameter
+  - [good_id] : fb post id
+- response code:
+  - 200, return in **application/json** format
+  - 404, the facebook group is not existed.
+- example:
+```bash
+ curl -GET http://127.0.0.1:3000/api/v1/fb_data/817620721658179_940605626026354/goods
+```
+- response data format when reponse code is 200OK:
+``` 
+{
+    "id":"0000000_0000000", //feed id
+    "message":"OOOO",
+    "updated_time":"2015-11-08T00:00:00+0000",
+    "attachments":[
+       {"height":720, "src":"http://www.example.com", "width":405},...
+    ], //post images
+    "from":{
+      "id":"000000000",//user's fbid
+      "name":"My name", //user's fbname
+      "picture":{"is_silhouette":false, "url":"http://www.example.com"} //user's profile picture
+    },
+    "like_count":0,
+    "comment_count":0,
+   }
+```
+**GET /api/v1/fb_data/goods/[good_id]/comments?token=[token]&action=[after|before]**
+- functionality:
+  - Show comments of **one** good by paging cursor
+- parameter
+  - [good_id] : fb post id
+  - action : should fill after if you want to get next page.
+- response code:
+  - 200, return in **application/json** format
+  - 404, the facebook group is not existed.
+- example:
+```bash
+ curl -GET http://127.0.0.1:3000/api/v1/fb_data/817620721658179_940605626026354/goods
+```
+- response data format when reponse code is 200OK:
+```
+{
+  "data": [
+    {"id":"...",
+    "message":"...",
+    "created_time":"2016-01-03T12:01:33+0000",
+    "from":{
+        "id":"1184030858291925",
+        "name":"李欣瑜",
+        "picture":{"is_silhouette":false,"url":"http://example.com"
+      }
+    },
+    "like_count":0
+    },....
+  ]",
+  "after": ..., #next page token
+  "before": "..."
+}
+```
+- note: After is null means next page is not exist
 
 
 
