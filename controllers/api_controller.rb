@@ -154,18 +154,18 @@ class SmartibuyDynamo < Sinatra::Base
   end
   read_good_post = lambda do 
     content_type :json
-    puts params[:good_id]
-    puts params[:token]
-    puts params[:action]
+    logger.info params[:good_id]
+    logger.info params[:token]
+    logger.info params[:action]
     one_good = get_one_good(params[:good_id])
     one_good.good_info_json
   end
   
   read_good_comments = lambda do 
     content_type :json
-    puts params[:good_id]
-    puts params[:token]
-    puts params[:action]
+    logger.info params[:good_id]
+    logger.info params[:token]
+    logger.info params[:action]
     one_good = get_one_good(params[:good_id], params[:token], params[:action])
     one_good.comments_json
   end
