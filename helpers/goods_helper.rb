@@ -11,13 +11,13 @@ module GoodsHelpers
       Goods.new(group_id).get_good_by_id(good_id)
     rescue
       halt 404
-    end  
+    end
   end
-  
+
    def get_one_good(fid,token=nil,action=nil)
-     FbGood.new(fid,token,action)
+     FbGood.new(fid, token, action)
    end
-   
+
    def get_all_shops_json
      Goods.shops
    end
