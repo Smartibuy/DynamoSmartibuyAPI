@@ -92,10 +92,10 @@ GEM
       ansi
       ast
     safe_yaml (1.0.4)
-    secondHandler (1.2.5)
+    secondHandler (1.2.6)
       commander
       koala
-    shopee (0.1.2)
+    shopee (0.2.1)
       json
       oga
     sinatra (1.4.6)
