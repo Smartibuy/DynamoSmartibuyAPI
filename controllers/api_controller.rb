@@ -74,7 +74,6 @@ class SmartibuyDynamo < Sinatra::Base
     end
   end
 
-
   get_product = lambda do
     content_type :json
     begin
@@ -142,6 +141,23 @@ class SmartibuyDynamo < Sinatra::Base
     shopee_worker.search_by_name_cate(params[:cate], params[:name], params[:num]).to_json
   end
 
+  get_mobile01_products = lambda do
+    content_type :json
+    begin
+      puts params[:cate]
+      shopee_worker = ShopeeWorker.new
+      if params[:page].nil?
+        products = shopee_worker.get_mobile01_products(params[:cate])
+      else
+        products = shopee_worker.get_mobile01_products(params[:cate], params[:page])
+      end
+
+      products.to_json
+    rescue
+      halt 400
+    end
+  end
+
   add_keyword_into_search_queue = lambda do
     keyword = params[:keyword]
     queue_search.enqueue(keyword)
@@ -152,6 +168,7 @@ class SmartibuyDynamo < Sinatra::Base
     list = get_all_information(params[:id], params[:timestamp], params[:page])
     list.read_current_page_json
   end
+
   read_good_post = lambda do
     content_type :json
     logger.info params[:good_id]
@@ -241,7 +258,6 @@ class SmartibuyDynamo < Sinatra::Base
 
   end
 
-
   save_user_info = lambda do
     content_type :json
     begin
@@ -291,9 +307,8 @@ class SmartibuyDynamo < Sinatra::Base
     else
       halt 500, 'There is no this user info.'
     end
-
-
   end
+
   get_all_user_info = lambda do
     content_type :json, charset: 'utf-8'
     users = User.all
@@ -329,6 +344,7 @@ class SmartibuyDynamo < Sinatra::Base
 
   # shopee
   get '/api/v1/search_mobile01/:cate/:name/:num/result.json', &search_mobile01
+  get '/api/v1/mobile01/:cate', &get_mobile01_products
 
   # enqueue
   post '/api/v1/add_keyword_to_search_queue/:keyword', &add_keyword_into_search_queue
