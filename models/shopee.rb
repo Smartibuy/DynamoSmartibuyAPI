@@ -8,8 +8,7 @@ class ShopeeWorker
   end
 
   def search_by_name_cate(cate, name, num)
-    cshopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(cate)
-    goods = cshopeecate.goods
-    cshopeecate.search_keyword(goods, name, num)
+    cshopeecate = ShopeeScrape::ShopeeListGoodsByCate.new()
+    cshopeecate.search_keyword(cate, name, num)
   end
 end
