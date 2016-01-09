@@ -312,7 +312,12 @@ class SmartibuyDynamo < Sinatra::Base
   end
   
   add_user_hashtag = lambda do
-    data = JSON.parse(request.body.read)
+    begin
+      data = JSON.parse(request.body.read)
+    rescue
+      halt 400
+    end
+  
     data["id"] = params[:id]
     
     form = UpdateUserTagForm.new(data)
