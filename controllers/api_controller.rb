@@ -152,7 +152,7 @@ class SmartibuyDynamo < Sinatra::Base
     list = get_all_information(params[:id], params[:timestamp], params[:page])
     list.read_current_page_json
   end
-  read_good_post = lambda do 
+  read_good_post = lambda do
     content_type :json
     logger.info params[:good_id]
     logger.info params[:token]
@@ -160,8 +160,8 @@ class SmartibuyDynamo < Sinatra::Base
     one_good = get_one_good(params[:good_id])
     one_good.good_info_json
   end
-  
-  read_good_comments = lambda do 
+
+  read_good_comments = lambda do
     content_type :json
     logger.info params[:good_id]
     logger.info params[:token]
@@ -278,6 +278,7 @@ class SmartibuyDynamo < Sinatra::Base
   end
 
   get_user_info = lambda do
+    content_type :json, charset: 'utf-8'
     user_a = User.where(:id => params[:id]).all
     index = {}
     if user_a[0] != nil
@@ -291,7 +292,22 @@ class SmartibuyDynamo < Sinatra::Base
 
 
   end
-
+  get_all_user_info = lambda do
+    content_type :json, charset: 'utf-8'
+    users = User.all
+    if not users.nil?
+      data = users.map do |user|
+        {
+          "id" => user.id,
+          "email" => user.email,
+          "hashtag" =>  user.hashtag
+        }
+      end
+      {"data" => data}.to_json
+    else
+      halt 500, 'There is no this user info.'
+    end
+  end
 
 
   get '/', &show_service_state
@@ -302,7 +318,7 @@ class SmartibuyDynamo < Sinatra::Base
   get '/api/v1/fb_data/goods/:good_id/comments', &read_good_comments
   get '/api/v1/fb_data/:id/goods', &read_group_post
   get '/api/v1/fb_data/shops', &get_all_shops
-  
+
   get '/api/v1/group/:id', &get_group
   post '/api/v1/create_group', &create_group
 
@@ -324,6 +340,8 @@ class SmartibuyDynamo < Sinatra::Base
 
   #update&get user data
   post '/api/v1/update_user_date/:id', &save_user_info
+  get '/api/v1/get_user_date/', &get_all_user_info
   get '/api/v1/get_user_date/:id', &get_user_info
+
 
 end
