@@ -4,7 +4,7 @@ class User
   include Dynamoid::Document
   field :id, :string
   field :email, :string
-  field :hashtag, :string
+  field :hashtag, :set
 
   def self.destroy(id)
     find(id).destroy

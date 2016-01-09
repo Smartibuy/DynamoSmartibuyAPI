@@ -246,6 +246,7 @@ class SmartibuyDynamo < Sinatra::Base
     begin
       req = JSON.parse(request.body.read)
       logger.info req
+      puts "4O"
     rescue
       halt 400
     end
