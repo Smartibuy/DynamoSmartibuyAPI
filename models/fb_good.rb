@@ -4,7 +4,7 @@ class FbGood
     attr_reader :fid, :token, :action, :post_handler
     def initialize(fid, token=nil, action=nil)
         @token = token
-        @action = action.to_sym
+        @action = action.nil? ? nil : action.to_sym
         @fid = fid
         @post_handler = SecondHandler::FbSinglePost.new("1517291225230751|o7NH0AUs5hiQRZpCTq2Q_9gZf0w",@fid)
     end
