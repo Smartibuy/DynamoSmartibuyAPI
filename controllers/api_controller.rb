@@ -169,6 +169,7 @@ class SmartibuyDynamo < Sinatra::Base
     one_good = get_one_good(params[:good_id], params[:token], params[:action])
     one_good.comments_json
   end
+
   get_all_shops = lambda do
     content_type :json
     get_all_shops_json

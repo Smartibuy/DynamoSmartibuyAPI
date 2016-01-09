@@ -95,7 +95,7 @@ GEM
     secondHandler (1.2.6)
       commander
       koala
-    shopee (0.2.1)
+    shopee (1.0.0)
       json
       oga
     sinatra (1.4.6)
