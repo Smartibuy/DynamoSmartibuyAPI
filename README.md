@@ -394,7 +394,7 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"cate_data\":\"{"htc":1, "apple":2}\"}" http://localhost:9292/api/v1/save_hot_cate
 ```
 
-**POST /api/v1/update_user_date/:userid**
+**POST /api/v1/user/:userid**
 - functionality:
   - Update user info into DB
 - request :
@@ -402,7 +402,7 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
   ```
     {
       "email":"[E-Mail]", # (string)
-      "hashtag": "[hashtag list]", # (string)
+      "hashtag": [hashtag list], # (array)
     }
   ```
 - response
@@ -410,10 +410,10 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
   - 400 - Not found
 - example:
 ```bash
-$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"email\":\"katy@qq\", \"hashtag\":\"[apple, 電腦]\"}" http://localhost:9292/api/v1/update_user_date/katy12
+$ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"email\":\"katy@qq\", \"hashtag\":[apple, 電腦]}" http://localhost:9292/api/v1/user/katy12
 ```
 
-**GET /api/v1/get_user_date/:id'**
+**GET /api/v1/user/:id'**
 - functionality:
  - Get user info from db
 - request:
@@ -424,14 +424,27 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
   - 500 - There is no this user info.
 - example:
 ```bash
-$ curl -GET http://127.0.0.1:9292/api/v1/get_user_date/katy12
+$ curl -GET http://127.0.0.1:9292/api/v1/user/katy12
 $ {"id":"katy12","email":"katy@qq","hashtag":"[apple, 電腦]"}%
+```
+**GET /api/v1/user/**
+- functionality:
+ - Get all user info from db
+- request:
+  - method: GET
+  - request url: `api/v1/user/:id`
+- reponse:
+  - 200
+  - 500 - There is no this user info.
+- example:
+```bash
+$ curl -GET http://127.0.0.1:9292/api/v1/user/
 ```
 
 
-**POST /api/v1/user/:id/tag**
+**POST /api/v1/user/:id/tags**
 - functionality:
- - add hashtag subscribe topic
+ - add one hashtag subscribe topic
 - request:
   - method: POST
   - entity : 
