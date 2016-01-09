@@ -289,7 +289,7 @@ class SmartibuyDynamo < Sinatra::Base
       index['hashtag'] = user_a[0].hashtag
       index.to_json
     else
-      halt 500, 'There is no this user info.'
+      halt 404, 'There is no this user info.'
     end
 
 
@@ -307,10 +307,29 @@ class SmartibuyDynamo < Sinatra::Base
       end
       {"data" => data}.to_json
     else
-      halt 500, 'There is no this user info.'
+      halt 404, 'There is no  user info.'
     end
   end
-
+  
+  add_user_hashtag = lambda do
+    data = JSON.parse(request.body.read)
+    data["id"] = params[:id]
+    
+    form = UpdateUserTagForm.new(data)
+    if form.valid?
+      target = User.find(params[:id]) 
+      if target.nil?
+        halt 404, "account not found!!!"
+      end
+      if target.hashtag.include? form.tag
+        halt 409, "tag has been exist"
+      end
+      target.hashtag << form.tag
+      target.save
+    else
+      halt 400, "failed to read #{form.error_fields} param(s)"
+    end
+  end
 
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
@@ -341,9 +360,11 @@ class SmartibuyDynamo < Sinatra::Base
   get '/api/v1/hot/:type', &get_hot_data
 
   #update&get user data
-  post '/api/v1/update_user_date/:id', &save_user_info
-  get '/api/v1/get_user_date/', &get_all_user_info
-  get '/api/v1/get_user_date/:id', &get_user_info
+  post '/api/v1/user/:id/tag/', &add_user_hashtag
+  post '/api/v1/user/:id', &save_user_info
+  
+  get '/api/v1/user/', &get_all_user_info
+  get '/api/v1/user/:id', &get_user_info
 
 
 end
