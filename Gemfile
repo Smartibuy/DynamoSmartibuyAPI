@@ -25,6 +25,10 @@ gem 'aws-sdk', '~> 2'     # DynamoDB (Dynamoid), SQS Message Queue
 gem 'dynamoid', '~> 1'
 gem 'dalli'               # Memcachier
 
+## mail
+gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
+gem 'slim'
+
 group :test do
   gem 'minitest'
   gem 'rack'

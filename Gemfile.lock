@@ -43,6 +43,8 @@ GEM
     dalli (2.7.5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    domain_name (0.5.25)
+      unf (>= 0.0.5, < 1.0.0)
     dynamoid (1.1.0)
       activemodel (~> 4)
       aws-sdk-resources (~> 2)
@@ -56,6 +58,8 @@ GEM
     hashdiff (0.2.3)
     highline (1.7.8)
     hirb (0.7.3)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -67,10 +71,15 @@ GEM
       addressable
       faraday
       multi_json
+    mailgun-ruby (1.0.3)
+      json (~> 1.8)
+      rest-client (~> 1.6)
+    mime-types (2.99)
     minitest (5.8.3)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    netrc (0.11.0)
     oga (2.0.0)
       ast
       ruby-ll (~> 2.1)
@@ -80,6 +89,10 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (10.4.2)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     ripl (0.7.1)
       bond (~> 0.5.1)
     ripl-multi_line (0.3.1)
@@ -109,6 +122,10 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (>= 1.3, < 3)
+    slim (3.0.6)
+      temple (~> 0.7.3)
+      tilt (>= 1.3.3, < 2.1)
+    temple (0.7.6)
     thin (1.6.4)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -122,6 +139,9 @@ GEM
       sinatra (>= 1.2.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     vcr (3.0.1)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -147,6 +167,7 @@ DEPENDENCIES
   hirb
   httparty
   json
+  mailgun-ruby (~> 1.0.3)
   minitest
   rack
   rack-test
@@ -155,6 +176,7 @@ DEPENDENCIES
   shopee
   sinatra
   sinatra-contrib
+  slim
   thin
   tux
   vcr

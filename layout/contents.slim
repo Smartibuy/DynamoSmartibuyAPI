@@ -1,0 +1,51 @@
+doctype 5
+html
+  head
+  
+    meta charset="UTF-8"
+    
+  body
+    css:
+      .external-table {
+        width: 100%;
+      }
+
+      .external-table th,td{
+        text-align:left;
+        height: 30px;
+        border-bottom: 1px solid #ddd;
+      } 
+      .external-table tr:hover {background-color: #f5f5f5}
+      .footer p{
+        text-align: center;
+      
+      }
+      
+    h1
+      = name
+      |您好,以下為您的最新好物
+    div
+      - data.each do |tag|
+        div.external-tags aria-controls="#{tag["tag"]}" role="tab" data-toggle="tab"
+          a 
+            =tag["tag"]
+        
+        div.tab-pane.fade id="#{tag["tag"]}" role="tabpanel"
+          table.external-table 
+            tr
+              th 商品名稱
+              th 價格
+              th 更新時間
+            - tag["contents"][0..5].each do |row|
+              tr
+                td 
+                  a href="http://www.mobile01.com/#{row["link"]}"
+                    =row["name"]
+                td
+                  =row["price"]
+                td
+                  =row["update_time"]
+
+      div.footer
+        p
+          | @smartibuy

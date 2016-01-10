@@ -377,7 +377,51 @@ class SmartibuyDynamo < Sinatra::Base
       halt 400, "failed to read #{form.error_fields} param(s)"
     end
   end
+  send_digest_mail = lambda do
+      template = ""
+      user_list = User.all
 
+      puts user_list
+      template_path = File.expand_path("../layout/contents.slim", File.dirname(__FILE__))
+      # template = ""
+      user_list.each do |user|
+         if not user.hashtag.nil?
+           data = Array.new
+           user.hashtag.each do |tag|
+              shopee_worker = ShopeeWorker.new
+              info = shopee_worker.get_mobile01_products(tag)
+
+
+              data << {
+                  "tag"=> tag,
+                  "contents" => info
+                }
+
+              require 'slim'
+              require 'mailgun'
+
+          end
+          puts template_path
+          parameters = {
+              :name => user["id"],
+              :data => data
+          }
+          template = Slim::Template.new(template_path).render(Object.new, parameters)
+
+          mg_client = Mailgun::Client.new ENV["MAILGUN_API_KEY"]
+
+                # Define your message parameters
+          message_params = {:from    => 'no-reply@sandbox3407e2df76274ee69f7ec89a064e1d8b.mailgun.org',
+                            :to      =>  user["email"],
+                            :subject => 'Smartibuy Digest',
+                            :html    => template}
+
+          # Send your message through the client
+          mg_client.send_message "sandbox3407e2df76274ee69f7ec89a064e1d8b.mailgun.org", message_params
+         end
+      end
+      template
+  end
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
   post '/api/v1/fb_data/search', &search_good
@@ -415,6 +459,6 @@ class SmartibuyDynamo < Sinatra::Base
 
   get '/api/v1/users/', &get_all_user_info
   get '/api/v1/users/:id', &get_user_info
-
+  post '/api/v1/mails' ,&send_digest_mail
 
 end
