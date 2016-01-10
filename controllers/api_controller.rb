@@ -144,7 +144,7 @@ class SmartibuyDynamo < Sinatra::Base
   get_mobile01_products = lambda do
     content_type :json
     begin
-      puts params[:cate]
+      puts params[:cate], params[:page]
       shopee_worker = ShopeeWorker.new
       if params[:page].nil?
         products = shopee_worker.get_mobile01_products(params[:cate])
