@@ -279,7 +279,7 @@ class SmartibuyDynamo < Sinatra::Base
     if user_a[0] == nil
       user_data = User.new(id: user_id, email: email, hashtag: hashtag)
       if user_data.save
-       status 201
+        status 201
       else
         halt 500, 'Failed to save keyword.'
       end
@@ -340,13 +340,19 @@ class SmartibuyDynamo < Sinatra::Base
     form = UpdateUserTagForm.new(data)
     if form.valid?
       target = User.find(params[:id])
+
       if target.nil?
         halt 404, "account not found!!!"
       end
-      if target.hashtag.include? form.tag
+
+      if target.hashtag.nil?
+        target.hashtag = [form.tag]
+      elsif target.hashtag.include? form.tag
         halt 409, "tag has been exist"
+      else
+        target.hashtag << form.tag
       end
-      target.hashtag << form.tag
+
       target.save
     else
       halt 400, "failed to read #{form.error_fields} param(s)"
