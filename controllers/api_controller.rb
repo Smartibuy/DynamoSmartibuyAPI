@@ -347,6 +347,7 @@ class SmartibuyDynamo < Sinatra::Base
       halt 400, "failed to read #{form.error_fields} param(s)"
     end
   end
+
   del_user_hashtag = lambda do
 
     form = UpdateUserTagForm.new(params)
@@ -370,9 +371,6 @@ class SmartibuyDynamo < Sinatra::Base
       halt 400, "failed to read #{form.error_fields} param(s)"
     end
   end
-
-
-
 
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
