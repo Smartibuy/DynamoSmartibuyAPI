@@ -283,17 +283,6 @@ class SmartibuyDynamo < Sinatra::Base
       else
         halt 500, 'Failed to save keyword.'
       end
-    else
-      user = user_a[0]
-      user.email = email
-      user.hashtag = hashtag
-
-      if user.save
-        status 201
-      else
-        halt 500, 'Failed to save keyword.'
-      end
-
     end
   end
 
