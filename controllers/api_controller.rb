@@ -358,6 +358,32 @@ class SmartibuyDynamo < Sinatra::Base
       halt 400, "failed to read #{form.error_fields} param(s)"
     end
   end
+  del_user_hashtag = lambda do
+
+    form = UpdateUserTagForm.new(params)
+    if form.valid?
+      target = User.find(params[:id])
+
+      if target.nil?
+        halt 404, "account not found!!!"
+      end
+
+      if target.hashtag.nil?
+        halt 409, "no this tag"
+      elsif target.hashtag.include? form.tag
+        target.hashtag.delete(form.tag)
+      else
+        halt 409, "no this tag"
+      end
+
+      target.save
+    else
+      halt 400, "failed to read #{form.error_fields} param(s)"
+    end
+  end
+
+
+
 
   get '/', &show_service_state
   get '/api/v1/fb_data/:id.json', &show_group_goods
@@ -391,6 +417,8 @@ class SmartibuyDynamo < Sinatra::Base
   #update&get user data
   post '/api/v1/users/:id/tags/', &add_user_hashtag
   post '/api/v1/users/:id', &save_user_info
+  delete '/api/v1/users/:id/tags/:tag', &del_user_hashtag
+
   get '/api/v1/users/', &get_all_user_info
   get '/api/v1/users/:id', &get_user_info
 
