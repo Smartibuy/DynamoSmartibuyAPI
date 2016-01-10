@@ -260,17 +260,19 @@ class SmartibuyDynamo < Sinatra::Base
 
   save_user_info = lambda do
     content_type :json
+
     begin
       req = JSON.parse(request.body.read)
-      logger.info req
-      puts "4O"
     rescue
+      puts errors
       halt 400
     end
 
     user_id = params[:id]
     email = req['email']
-    hashtag = req['hashtag']
+    hashtag = req['hashtag'].nil? ? [] : req['hashtag']
+
+    puts params[:id], email
 
     user_a = User.where(:id => user_id).all
 
@@ -287,7 +289,7 @@ class SmartibuyDynamo < Sinatra::Base
       user.hashtag = hashtag
 
       if user.save
-       status 201
+        status 201
       else
         halt 500, 'Failed to save keyword.'
       end
@@ -325,19 +327,19 @@ class SmartibuyDynamo < Sinatra::Base
       halt 404, 'There is no  user info.'
     end
   end
-  
+
   add_user_hashtag = lambda do
     begin
       data = JSON.parse(request.body.read)
     rescue
       halt 400
     end
-  
+
     data["id"] = params[:id]
-    
+
     form = UpdateUserTagForm.new(data)
     if form.valid?
-      target = User.find(params[:id]) 
+      target = User.find(params[:id])
       if target.nil?
         halt 404, "account not found!!!"
       end
