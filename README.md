@@ -394,9 +394,9 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"cate_data\":\"{"htc":1, "apple":2}\"}" http://localhost:9292/api/v1/save_hot_cate
 ```
 
-**POST /api/v1/user/:userid**
+**POST /api/v1/users/:userid**
 - functionality:
-  - Update user info into DB
+  - ADD user info into DB
 - request :
   - Content-type: application/json
   ```
@@ -413,7 +413,7 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"email\":\"katy@qq\", \"hashtag\":[apple, 電腦]}" http://localhost:9292/api/v1/user/katy12
 ```
 
-**GET /api/v1/user/:id'**
+**GET /api/v1/users/:id'**
 - functionality:
  - Get user info from db
 - request:
@@ -427,7 +427,7 @@ $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X P
 $ curl -GET http://127.0.0.1:9292/api/v1/user/katy12
 $ {"id":"katy12","email":"katy@qq","hashtag":"[apple, 電腦]"}%
 ```
-**GET /api/v1/user/**
+**GET /api/v1/users/**
 - functionality:
  - Get all user info from db
 - request:
@@ -442,7 +442,7 @@ $ curl -GET http://127.0.0.1:9292/api/v1/user/
 ```
 
 
-**POST /api/v1/user/:id/tags**
+**POST /api/v1/users/:id/tags**
 - functionality:
  - add one hashtag subscribe topic
 - request:
