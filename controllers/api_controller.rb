@@ -158,6 +158,12 @@ class SmartibuyDynamo < Sinatra::Base
     end
   end
 
+  get_cate_childs = lambda do
+      content_type :json
+      shopee_worker = ShopeeWorker.new
+      shopee_worker.get_cate_childs(params[:cate]).to_json
+  end
+
   add_keyword_into_search_queue = lambda do
     keyword = params[:keyword]
     queue_search.enqueue(keyword)
@@ -390,6 +396,7 @@ class SmartibuyDynamo < Sinatra::Base
   # shopee
   get '/api/v1/search_mobile01/:cate/:name/:num/result.json', &search_mobile01
   get '/api/v1/mobile01/:cate', &get_mobile01_products
+  get '/api/v1/mobile01_child/:cate', &get_cate_childs
 
   # enqueue
   post '/api/v1/add_keyword_to_search_queue/:keyword', &add_keyword_into_search_queue
