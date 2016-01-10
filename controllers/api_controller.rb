@@ -385,39 +385,47 @@ class SmartibuyDynamo < Sinatra::Base
       template_path = File.expand_path("../layout/contents.slim", File.dirname(__FILE__))
       # template = ""
       user_list.each do |user|
+         data = Array.new
          if not user.hashtag.nil?
-           data = Array.new
            user.hashtag.each do |tag|
-              shopee_worker = ShopeeWorker.new
-              info = shopee_worker.get_mobile01_products(tag)
+             begin
+                shopee_worker = ShopeeWorker.new
+                puts "taging read ... #{tag}"
+                info = shopee_worker.get_mobile01_products(tag)
 
 
-              data << {
-                  "tag"=> tag,
-                  "contents" => info
-                }
+                data << {
+                    "tag"=> tag,
+                    "contents" => info
+                  }
+              rescue
+                logger.warn "no data"
+              end
 
-              require 'slim'
-              require 'mailgun'
+
 
           end
-          puts template_path
-          parameters = {
-              :name => user["id"],
-              :data => data
-          }
-          template = Slim::Template.new(template_path).render(Object.new, parameters)
+          if not data.empty?
+            require 'slim'
+            require 'mailgun'
+            puts template_path
+            parameters = {
+                :name => user["id"],
+                :data => data
+            }
+            template = Slim::Template.new(template_path).render(Object.new, parameters)
 
-          mg_client = Mailgun::Client.new ENV["MAILGUN_API_KEY"]
+            mg_client = Mailgun::Client.new ENV["MAILGUN_API_KEY"]
 
-                # Define your message parameters
-          message_params = {:from    => 'no-reply@mg.smartibuy.top',
-                            :to      =>  user["email"],
-                            :subject => 'Smartibuy 給您專屬於您的最新好物',
-                            :html    => template}
+                  # Define your message parameters
+            message_params = {:from    => 'no-reply@mg.smartibuy.top',
+                              :to      =>  user["email"],
+                              :subject => 'Smartibuy 給您專屬於您的最新好物',
+                              :html    => template}
 
-          # Send your message through the client
-          mg_client.send_message "mg.smartibuy.top", message_params
+            # Send your message through the client
+            mg_client.send_message "mg.smartibuy.top", message_params
+          end
          end
       end
       template

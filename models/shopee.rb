@@ -13,6 +13,7 @@ class ShopeeWorker
   end
 
   def get_mobile01_products(cate, page=1)
+    puts cate
     shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(cate, page)
     shopeecate.goods
   end
