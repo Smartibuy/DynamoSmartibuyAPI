@@ -17,4 +17,8 @@ class ShopeeWorker
     shopeecate.goods
   end
 
+  def get_cate_childs(cate)
+    cshopeecate = ShopeeScrape::ShopeeListGoodsByCate.new()
+    cshopeecate.get_cate_childs(cate)
+  end
 end
