@@ -61,7 +61,7 @@ $ RACK_ENV=production rake db:migrate
  curl -GET http://127.0.0.1:3000/api/v1/fb_data/shops
 ```
 - example output
-``` json
+```
 {
   "data": [
     {
@@ -160,7 +160,7 @@ $ RACK_ENV=production rake db:migrate
  curl -GET http://127.0.0.1:3000/api/v1/fb_data/817620721658179_940605626026354/goods
 ```
 - response data format when reponse code is 200OK:
-``` 
+```
 {
     "id":"0000000_0000000", //feed id
     "message":"OOOO",
@@ -447,8 +447,8 @@ $ curl -GET http://127.0.0.1:9292/api/v1/user/
  - add one hashtag subscribe topic
 - request:
   - method: POST
-  - entity : 
-  ``` 
+  - entity :
+  ```
   {
     "tag": "string" /*only string*/
   }
@@ -463,6 +463,20 @@ $ curl -GET http://127.0.0.1:9292/api/v1/user/
 $ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"hashtag\":\"衣服\"}" http://localhost:9292/api/v1/user/rubybaby/tag/
 ```
 
+**Delete '/api/v1/users/:id/tags/:tag'**
+
+- functionality:
+ - delete one hashtag subscribe topic
+- request:
+  - method: Delete
+  - param :
+    - id : user_id
+    - tag : tag name
+  - reponse:
+    - 200 - OK success
+    - 400 - request wrong format.
+    - 409 - tag not exist
+    - 404 - user does not exist
 
 
 LICENSE
