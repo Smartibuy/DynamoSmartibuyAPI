@@ -381,10 +381,10 @@ class SmartibuyDynamo < Sinatra::Base
   get '/api/v1/hot/:type', &get_hot_data
 
   #update&get user data
-  post '/api/v1/user/:id/tags/', &add_user_hashtag
-  post '/api/v1/user/:id', &save_user_info
-  get '/api/v1/user/', &get_all_user_info
-  get '/api/v1/user/:id', &get_user_info
+  post '/api/v1/users/:id/tags/', &add_user_hashtag
+  post '/api/v1/users/:id', &save_user_info
+  get '/api/v1/users/', &get_all_user_info
+  get '/api/v1/users/:id', &get_user_info
 
 
 end
