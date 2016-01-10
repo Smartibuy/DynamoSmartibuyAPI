@@ -411,13 +411,13 @@ class SmartibuyDynamo < Sinatra::Base
           mg_client = Mailgun::Client.new ENV["MAILGUN_API_KEY"]
 
                 # Define your message parameters
-          message_params = {:from    => 'no-reply@sandbox3407e2df76274ee69f7ec89a064e1d8b.mailgun.org',
+          message_params = {:from    => 'no-reply@mg.smartibuy.top',
                             :to      =>  user["email"],
-                            :subject => 'Smartibuy Digest',
+                            :subject => 'Smartibuy 給您專屬於您的最新好物',
                             :html    => template}
 
           # Send your message through the client
-          mg_client.send_message "sandbox3407e2df76274ee69f7ec89a064e1d8b.mailgun.org", message_params
+          mg_client.send_message "mg.smartibuy.top", message_params
          end
       end
       template
